@@ -11,7 +11,7 @@ body { font-family:Tahoma; color:#123456; font-size:0.8em; margin-top:5px; margi
 h1 { font-size:30px; }
 h2 { font-size:15px; margin:0; padding:0; }
 
-#wrapper { position:relative; margin:0 auto; width:1024px; min-height:608px; background:#e1f8fe; }
+#wrapper { position:relative; margin:0 auto; width:1024px; min-height:608px; }
 
 #leftpane { position:absolute; width:250px; top:100px; left:50px; }
 #about { height:50px; margin-bottom:10px; border:#cccccc solid 1px; }
