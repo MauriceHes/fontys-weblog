@@ -17,7 +17,7 @@
     <body>
         <div id="wrapper">
             <h1>Admin panel</h1>
-            <a href="MyBlogController?page=index" id="indexlink">View My Blog</a>
+            <a href="blog" id="indexlink">View My Blog</a>
             <div id="adminpane">
                 <form action="AddPost" method="POST">
                     <div id="posttitle"><label id="labeltitle" for="inputtitle">Title:</label><input type="text" name="inputtitle" id="inputtitle"/>
