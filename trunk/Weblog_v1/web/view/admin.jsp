@@ -17,16 +17,17 @@
     <body>
         <div id="wrapper">
             <h1>Admin panel</h1>
-            <div id="leftpane">
-                <div id="about"><h2>ABOUT</h2>text</div>
-                <div id="pictures"><h2>PICTURES</h2>text</div>
-                <div id="friends"><h2>FRIENDS</h2>text</div>
+            <a href="MyBlogController?page=index" id="indexlink">View My Blog</a>
+            <div id="adminpane">
+                <form action="AddPost" method="POST">
+                    <div id="posttitle"><label id="labeltitle" for="inputtitle">Title:</label><input type="text" name="inputtitle" id="inputtitle"/>
+                    </div>
+                    <div id="postbody"><label id="labelbody" for="inputbody">Body:</label><textarea name="inputbody" id="inputbody" rows="5"></textarea>
+                    </div>
+                    <button id="buttonpost">Add Post</button>
+                </form>
             </div>
-            <div id="rightpane">
-                <div id="post"><h2>POST1</h2>text</div>
-                <div id="post"><h2>POST2</h2>text</div>
-                <div id="post"><h2>POST3</h2>text</div>
-            </div>
+            <div id="lijntje"></div>
         </div>
     </body>
 </html>
