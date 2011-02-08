@@ -10,14 +10,25 @@
 body { font-family:Tahoma; color:#123456; font-size:0.8em; margin-top:5px; margin-bottom:0; }
 h1 { font-size:30px; }
 h2 { font-size:15px; margin:0; padding:0; }
+p { margin:0; padding:0; }
 
-#wrapper { position:relative; margin:0 auto; width:1024px; min-height:608px; }
+#wrapper { position:relative; margin:0 auto; width:768px; min-height:608px; }
 
-#leftpane { position:absolute; width:250px; top:100px; left:50px; }
-#about { height:50px; margin-bottom:10px; border:#cccccc solid 1px; }
-#pictures { height:150px; margin-bottom:10px; border:#cccccc solid 1px; }
-#friends { height:200px; margin-bottom:10px; border:#cccccc solid 1px; }
+#leftpane { position:absolute; width:250px; top:100px; left:0px; }
+#leftpane #about { height:50px; margin-bottom:10px; border:#cccccc solid 1px; }
+#leftpane #pictures { height:150px; margin-bottom:10px; border:#cccccc solid 1px; }
+#leftpane #friends { height:200px; margin-bottom:10px; border:#cccccc solid 1px; }
 
-#rightpane { position:absolute; height:200px; width:500px; top:100px; left:350px; }
-#post { height:150px; margin-bottom:10px; border:#cccccc solid 1px; }
+#rightpane { position:absolute; height:200px; width:450px; top:100px; left:260px; }
+#rightpane .post { height:150px; margin-bottom:10px; border:#cccccc solid 1px; }
 
+#indexlink { position:absolute; top:0px; left:600px; color:#123456; }
+#adminpane { position:absolute; width:700px; top:100px; left:50px; clear:both; }
+#adminpane label { display:inline-block; width:100px; vertical-align:top; }
+#adminpane input { display:inline-block; width:400px; }
+#adminpane textarea { display:inline-block; width:400px; }
+#adminpane #posttitle { margin-bottom:10px; }
+#adminpane #posttitle #labeltitle { margin-right: 10px; }
+#adminpane #postbody #labelbody { margin-right: 10px; }
+#adminpane #buttonpost { position:absolute; top:115px; left:550px; }
+#lijntje { position:absolute; height:0px; width:95%; top:250px; border:#cccccc solid 1px; }
