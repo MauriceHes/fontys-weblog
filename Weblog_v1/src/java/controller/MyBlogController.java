@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
+import Service.WebLogService;
+import dao.WebLogDaoImp;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +18,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jurgen
  */
-@WebServlet(name="MyBlogController", urlPatterns={"/MyBlogController"})
+@WebServlet(name = "MyBlogController", urlPatterns = {"/blog", "/admin", "/addPost"})
+//@WebServlet(value="/blog")
 public class MyBlogController extends HttpServlet {
-   
+
+    WebLogService weblogService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        weblogService = new WebLogService();
+    }
+
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -28,29 +40,34 @@ public class MyBlogController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
 
-        PageEnum p = PageEnum.valueOf(request.getParameter("page").toUpperCase());
-        switch(p)
-        {
-            case INDEX:
-                    //request.setAttribute("", p);
-                    RequestDispatcher indexView = request.getRequestDispatcher("view/index.jsp");
-                    indexView.forward(request, response);
-                break;
-            case ADMIN:
-                    RequestDispatcher adminView = request.getRequestDispatcher("view/admin.jsp");
-                    adminView.forward(request, response);
-                break;
+        response.setContentType("text/html;charset=UTF-8");
+        
+        String uri = request.getRequestURI().replace(request.getContextPath() + "/", "");
+        PageEnum p;
+
+        try{
+            p = PageEnum.valueOf(uri.toUpperCase());
+        }catch(IllegalArgumentException iaex){
+            p = PageEnum.BLOG;
         }
         
-        /*PrintWriter out = response.getWriter();
-        try {
-        } finally { 
-            out.close();
-        }*/
-    } 
+        switch (p) {
+            case BLOG:
+                RequestDispatcher indexView = request.getRequestDispatcher("view/index.jsp");
+                indexView.forward(request, response);
+                break;
+            case ADMIN:
+                RequestDispatcher adminView = request.getRequestDispatcher("view/admin.jsp");
+                adminView.forward(request, response);
+                break;
+            case ADDPOST:
+                RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
+                addPostView.forward(request, response);
+                break;
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -62,9 +79,9 @@ public class MyBlogController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -75,7 +92,7 @@ public class MyBlogController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -87,5 +104,4 @@ public class MyBlogController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
