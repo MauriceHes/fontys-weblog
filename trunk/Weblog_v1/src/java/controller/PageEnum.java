@@ -6,6 +6,7 @@ package controller;
  */
 public enum PageEnum
 {
-    INDEX,
-    ADMIN
+    BLOG,
+    ADMIN,
+    ADDPOST
 }

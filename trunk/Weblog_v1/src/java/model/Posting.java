@@ -2,20 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Posting  {
-     private Long id;
-     private String title;
-     private String content;
-     private Date date;
-     private List<Comment> comments;
+public class Posting {
 
-      public Posting(String title, String content) {
+    private Long id;
+    private String title;
+    private String content;
+    private Date date;
+    private List<Comment> comments;
+
+    public Posting(String title, String content) {
         this.title = title;
         this.content = content;
         this.date = new Date();
@@ -50,7 +51,6 @@ public class Posting  {
         return date;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -66,5 +66,4 @@ public class Posting  {
     public void setTitle(String title) {
         this.title = title;
     }
-
 }
