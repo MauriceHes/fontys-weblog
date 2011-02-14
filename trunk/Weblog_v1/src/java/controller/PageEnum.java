@@ -8,5 +8,8 @@ public enum PageEnum
 {
     BLOG,
     ADMIN,
-    ADDPOST
+    VIEWPOST,
+    ADDPOST,
+    EDITPOST,
+    DELETEPOST
 }

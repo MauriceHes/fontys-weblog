@@ -11,6 +11,7 @@ body { font-family:Tahoma; color:#123456; font-size:0.8em; margin-top:5px; margi
 h1 { font-size:30px; }
 h2 { font-size:15px; margin:0; padding:0; }
 p { margin:0; padding:0; }
+a { color:#123456; }
 
 #wrapper { position:relative; margin:0 auto; width:768px; min-height:608px; }
 
@@ -20,7 +21,8 @@ p { margin:0; padding:0; }
 #leftpane #friends { height:200px; margin-bottom:10px; border:#cccccc solid 1px; }
 
 #rightpane { position:absolute; height:200px; width:450px; top:100px; left:260px; }
-#rightpane .post { height:150px; margin-bottom:10px; border:#cccccc solid 1px; }
+#rightpane .post { margin-bottom:10px; }
+#rightpane .post .comment { margin-left:50px; padding-top:5px; padding-bottom:5px; margin-bottom:5px; margin-top:5px; border:#cccccc solid 1px; }
 
 #indexlink { position:absolute; top:0px; left:600px; color:#123456; }
 #adminpane { position:absolute; width:700px; top:100px; left:50px; clear:both; }
@@ -32,3 +34,10 @@ p { margin:0; padding:0; }
 #adminpane #postbody #labelbody { margin-right: 10px; }
 #adminpane #buttonpost { position:absolute; top:115px; left:550px; }
 #lijntje { position:absolute; height:0px; width:95%; top:250px; border:#cccccc solid 1px; }
+
+#editpane { position:absolute; top:275px; left:0px; }
+#editpane .post { margin-bottom:10px; }
+#editpane .post .edittitle { min-width:200px; display:inline-block; }
+#editpane .post .editdate { min-width:400px; display:inline-block; }
+#editpane .post .editpost { min-width:50px; display:inline-block; }
+#editpane .post .deletepost { min-width:50px; display:inline-block; }
