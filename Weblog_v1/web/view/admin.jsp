@@ -4,6 +4,8 @@
     Author     : Jurgen
 --%>
 
+<%@page import="model.Posting"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,10 +18,10 @@
     </head>
     <body>
         <div id="wrapper">
-            <h1>Admin panel</h1>
+            <a href="admin"><h1>Admin panel</h1></a>
             <a href="blog" id="indexlink">View My Blog</a>
             <div id="adminpane">
-                <form action="AddPost" method="POST">
+                <form action="addpost" method="POST">
                     <div id="posttitle"><label id="labeltitle" for="inputtitle">Title:</label><input type="text" name="inputtitle" id="inputtitle"/>
                     </div>
                     <div id="postbody"><label id="labelbody" for="inputbody">Body:</label><textarea name="inputbody" id="inputbody" rows="5"></textarea>
@@ -28,6 +30,15 @@
                 </form>
             </div>
             <div id="lijntje"></div>
+            <div id="editpane">
+                <%
+                    List<Posting> posts = (List)request.getAttribute("posts");
+                    for(Posting p: posts){
+                        out.println("<div class='post'><span class='edittitle'>" + p.getTitle() + "</span><span class='editdate'>" +
+                                p.getDate() + "</span><span class='editpost'>EDIT</span><span class='deletepost'>DELETE</span></div>");
+                    }
+                %>
+            </div>
         </div>
     </body>
 </html>

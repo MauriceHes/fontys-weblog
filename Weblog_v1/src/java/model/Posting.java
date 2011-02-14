@@ -35,6 +35,10 @@ public class Posting {
         return comments;
     }
 
+    public void setComment(Comment c) {
+        this.comments.add(c);
+    }
+
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }

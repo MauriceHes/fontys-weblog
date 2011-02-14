@@ -13,12 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Posting;
 
 /**
  *
  * @author Jurgen
  */
-@WebServlet(name = "MyBlogController", urlPatterns = {"/blog", "/admin", "/addPost"})
+@WebServlet(name = "MyBlogController", urlPatterns = {"/blog", "/admin", "/addpost", "/viewpost"})
 //@WebServlet(value="/blog")
 public class MyBlogController extends HttpServlet {
 
@@ -55,14 +56,24 @@ public class MyBlogController extends HttpServlet {
         
         switch (p) {
             case BLOG:
+                request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher indexView = request.getRequestDispatcher("view/index.jsp");
                 indexView.forward(request, response);
                 break;
+            case VIEWPOST:
+                request.setAttribute("post", weblogService.getPost(Long.valueOf(request.getParameter("id"))));
+                RequestDispatcher viewPostView = request.getRequestDispatcher("view/viewpost.jsp");
+                viewPostView.forward(request, response);
+                break;
             case ADMIN:
+                request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher adminView = request.getRequestDispatcher("view/admin.jsp");
                 adminView.forward(request, response);
                 break;
             case ADDPOST:
+                Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
+                weblogService.addPosting(newPost);
+                request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
                 addPostView.forward(request, response);
                 break;

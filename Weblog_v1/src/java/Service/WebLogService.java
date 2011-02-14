@@ -6,6 +6,8 @@ package Service;
 
 import dao.WebLogDao;
 import dao.WebLogDaoImp;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.*;
 
@@ -23,6 +25,10 @@ public class WebLogService {
 
     public List<Posting> getPostings() {
         return webLogDao.listPostings();
+    }
+
+    public Posting getPost(long id) {
+        return webLogDao.getPosting(id);
     }
 
     ;
