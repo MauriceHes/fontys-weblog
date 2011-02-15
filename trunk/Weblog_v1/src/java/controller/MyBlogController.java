@@ -58,7 +58,7 @@ public class MyBlogController extends HttpServlet {
         switch (p) {
             case BLOG:
                 request.setAttribute("posts", weblogService.getPostings());
-                RequestDispatcher indexView = request.getRequestDispatcher("view/index.jsp");
+                RequestDispatcher indexView = request.getRequestDispatcher("view/blog.jsp");
                 indexView.forward(request, response);
                 break;
             case VIEWPOST:
@@ -79,11 +79,12 @@ public class MyBlogController extends HttpServlet {
                 addPostView.forward(request, response);
                 break;
             case ADDCOMMENT:
-                Long postid = Long.getLong(request.getParameter("postid"));
-                Comment newComment = new Comment(Long.MIN_VALUE, request.getParameter("commentbody"));
-                weblogService.addComment(newComment, postid);
-                request.setAttribute("posts", weblogService.getPostings());
-                RequestDispatcher addCommentView = request.getRequestDispatcher("view/index.jsp");
+                Long postid = Long.parseLong(request.getParameter("postid"));
+                Posting post = weblogService.getPost(postid);
+                Comment newComment = new Comment(post.getNextCommentID(), request.getParameter("commentbody"));
+                post.setComment(newComment);
+                request.setAttribute("post", post);
+                RequestDispatcher addCommentView = request.getRequestDispatcher("view/viewpost.jsp");
                 addCommentView.forward(request, response);
                 break;
         }

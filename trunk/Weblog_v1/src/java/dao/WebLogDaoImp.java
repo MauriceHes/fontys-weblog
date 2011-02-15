@@ -34,17 +34,17 @@ public class WebLogDaoImp implements WebLogDao {
 
         this.p = new Posting(1L,"My first post", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra pretium ante vitae sodales. In hac habitasse platea dictumst. Morbi lacus neque, placerat eu ultrices non, convallis ac ipsum. Fusce interdum tortor sit amet nisl vehicula et malesuada felis malesuada. Curabitur tempor, erat sed volutpat imperdiet, nibh eros convallis urna, quis viverra nunc libero egestas mi. Donec nulla nulla, auctor eleifend varius non, porttitor ac magna. Mauris in purus est, quis commodo nisl. Integer et ipsum felis. Nulla elit diam, fermentum hendrerit adipiscing et, faucibus vitae purus. Ut ligula elit, vulputate aliquam consectetur in, scelerisque id dui. Nulla facilisi. ");
         //c = new ArrayList();
-        this.c.add(new Comment(1L, "Comment 1 bij post 1"));
-        this.c.add(new Comment(2L, "Comment 2 bij post 1"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 1 bij post 1"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 2 bij post 1"));
         this.p.setComments(this.c);
         this.postings.put(1L, this.p);
 
         this.p = new Posting(2L,"My second post", "Cras sem nunc, dignissim ac tristique quis, ultrices at dui. Suspendisse potenti. Sed cursus massa sagittis justo faucibus porttitor. Curabitur vel nulla lectus, eget vulputate quam. Duis bibendum enim eu massa dapibus at imperdiet magna blandit. Mauris ut odio at lectus ultrices tempor. Cras sit amet erat orci, ut molestie ante. Suspendisse potenti. Nullam nisi metus, imperdiet vel molestie non, sodales eu nulla. Etiam et ligula justo, non porta nisl. Etiam vel facilisis velit. In hac habitasse platea dictumst. Vivamus ut felis justo, quis tincidunt nisi. Maecenas ut quam diam, a molestie lectus. Vivamus lobortis fermentum nibh feugiat gravida. Duis consectetur elementum massa nec malesuada. Mauris posuere aliquet porttitor. Etiam mi leo, feugiat in facilisis id, tempor mattis enim. ");
         this.c = new ArrayList();
-        this.c.add(new Comment(1L, "Comment 1 bij post 2"));
-        this.c.add(new Comment(1L, "Comment 2 bij post 2"));
-        this.c.add(new Comment(1L, "Comment 3 bij post 2"));
-        this.c.add(new Comment(1L, "Comment 4 bij post 2"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 1 bij post 2"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 2 bij post 2"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 3 bij post 2"));
+        this.c.add(new Comment(this.p.getNextCommentID(), "Comment 4 bij post 2"));
         this.p.setComments(this.c);
         this.postings.put(2L, this.p);
 

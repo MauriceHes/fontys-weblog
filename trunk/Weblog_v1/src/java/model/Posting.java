@@ -15,12 +15,14 @@ public class Posting {
     private String content;
     private Date date;
     private List<Comment> comments;
+    private Long nextCommentId;
 
     public Posting(String title, String content) {
         this.title = title;
         this.content = content;
         this.date = new Date();
         this.comments = new ArrayList<Comment>();
+        this.nextCommentId = 0L;
     }
 
     public Posting(Long id, String title, String content) {
@@ -29,6 +31,13 @@ public class Posting {
         this.content = content;
         this.date = new Date();
         this.comments = new ArrayList<Comment>();
+        this.nextCommentId = 0L;
+    }
+
+    public Long getNextCommentID()
+    {
+        this.nextCommentId++;
+        return this.nextCommentId;
     }
 
     public List<Comment> getComments() {
