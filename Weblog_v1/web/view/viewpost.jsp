@@ -60,7 +60,7 @@
 
                 %>
                 
-                    <form id="commentform" action="" method="POST">
+                    <form id="commentform" action="#" method="POST">
                         <div id="postbody">
                             <label id="labelbody" for="commentbody">Comment:</label>
                             <textarea name="commentbody" id="commentbody" rows="5"></textarea>

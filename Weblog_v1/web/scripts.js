@@ -1,17 +1,17 @@
 $(document).ready(function() {
-    $('#form').submit(function() {
+    $('#commentform').submit(function() {
         var postid = $('#postid').val();
         var commentbody = $('#commentbody').val();
 
+        //alert("comment: " +commentbody);
+
 	$.ajax({
             type: 		"post",
-            url: 		"comment.jsp",
+            url: 		"addcomment",
             data: 		"postid=" + postid + "&commentbody=" + commentbody,
             success:
                 function(data) {
                     $('.post').append(data);
-                    //$('#result').hide();
-                    //$("#result").html("<h3>" + data + "</h3>").fadeIn("slow");
 		}
 	});
 	return false;
