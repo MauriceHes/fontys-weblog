@@ -58,7 +58,7 @@ public class WebLogDaoImp implements WebLogDao {
         if (p == null) {
             throw new IllegalArgumentException("Posting is null");
         }
-        this.p.setId(this.nextId);
+        p.setId(this.nextId);
         this.postings.put(this.nextId++ , p);
     };
 
