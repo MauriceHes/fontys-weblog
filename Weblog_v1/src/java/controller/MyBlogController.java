@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Comment;
 import model.Posting;
 
@@ -25,6 +26,7 @@ import model.Posting;
 //@WebServlet(value="/blog")
 public class MyBlogController extends HttpServlet {
 
+    HttpSession session;
     WebLogService weblogService;
 
     @Override
@@ -46,6 +48,7 @@ public class MyBlogController extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
+        session = request.getSession();
         
         String uri = request.getRequestURI().replace(request.getContextPath() + "/", "");
         PageEnum p;
@@ -68,16 +71,39 @@ public class MyBlogController extends HttpServlet {
                 viewPostView.forward(request, response);
                 break;
             case ADMIN:
+                if(session.getAttribute("mode") == null)
+                {
+                    session.setAttribute("mode", "basic");
+                }
+
+                if(request.getParameter("mode") != null)
+                {
+                    if(request.getParameter("mode").equals("advanced"))
+                    {
+                        session.setAttribute("mode", "advanced");
+
+                    }else{
+                        session.setAttribute("mode", "basic");
+                    }
+                }
+
                 request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher adminView = request.getRequestDispatcher("view/admin.jsp");
                 adminView.forward(request, response);
+
                 break;
             case ADDPOST:
-                Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
-                weblogService.addPosting(newPost);
-                request.setAttribute("posts", weblogService.getPostings());
-                RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
-                addPostView.forward(request, response);
+                if(request.getParameter("action").equals("new")){
+                    Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
+                    weblogService.addPosting(newPost);
+                }else{
+                    Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
+                    //weblogService.editPosting(newPost, request.getParameter("postid"));
+                }
+                    request.setAttribute("posts", weblogService.getPostings());
+                    RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
+                    addPostView.forward(request, response);
+                
                 break;
             case ADDCOMMENT:
                 Long postid = Long.parseLong(request.getParameter("postid"));

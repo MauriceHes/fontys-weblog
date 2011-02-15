@@ -32,10 +32,10 @@ a { color:#123456; }
 #adminpane #posttitle { margin-bottom:10px; }
 #adminpane #posttitle #labeltitle { margin-right: 10px; }
 #adminpane #postbody #labelbody { margin-right: 10px; }
-#adminpane #buttonpost { position:absolute; top:115px; left:550px; }
-#lijntje { position:absolute; height:0px; width:95%; top:250px; border:#cccccc solid 1px; }
+#adminpane #buttonpost { position:absolute; top:215px; left:550px; }
+#lijntje { position:absolute; height:0px; width:95%; top:350px; border:#cccccc solid 1px; }
 
-#editpane { position:absolute; top:275px; left:0px; }
+#editpane { position:absolute; top:375px; left:0px; }
 #editpane .post { margin-bottom:10px; }
 #editpane .post .edittitle { min-width:200px; display:inline-block; }
 #editpane .post .editdate { min-width:400px; display:inline-block; }

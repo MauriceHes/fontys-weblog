@@ -75,13 +75,4 @@ public class WebLogDaoImp implements WebLogDao {
         return this.postings.get(id);
     }
 
-    @Override
-    public void saveComment(Comment c, Long postid) {
-        if(c == null) {
-            throw new IllegalArgumentException("Comment is null");
-        }
-        this.c.add(c);
-        this.p.setComments(this.c);
-        this.postings.put(postid, this.p);
-    }
 }
