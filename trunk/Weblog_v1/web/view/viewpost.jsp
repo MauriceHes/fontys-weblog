@@ -17,8 +17,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="global.css" rel="stylesheet" type="text/css">
-        <!--<script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
-        <script src="jquery.form.js" type="text/javascript"></script>
+        <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+        <!--<script src="jquery.form.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(function()
             {
