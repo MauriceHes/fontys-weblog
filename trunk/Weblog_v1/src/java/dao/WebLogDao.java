@@ -14,5 +14,5 @@ public interface WebLogDao {
     List<Posting> listPostings();
     Posting getPosting(Long id);
 
-    void saveComment(Comment c, Long postid);
+    
 }

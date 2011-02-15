@@ -3,7 +3,6 @@ $(document).ready(function() {
         var postid = $('#postid').val();
         var commentbody = $('#commentbody').val();
 
-        //alert("comment: " +commentbody);
 
 	$.ajax({
             type: 		"post",
