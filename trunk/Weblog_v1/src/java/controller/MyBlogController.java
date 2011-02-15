@@ -13,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Comment;
 import model.Posting;
 
 /**
  *
  * @author Jurgen
  */
-@WebServlet(name = "MyBlogController", urlPatterns = {"/blog", "/admin", "/addpost", "/viewpost"})
+@WebServlet(name = "MyBlogController", urlPatterns = {"/blog", "/admin", "/addpost", "/viewpost", "/addcomment"})
 //@WebServlet(value="/blog")
 public class MyBlogController extends HttpServlet {
 
@@ -76,6 +77,14 @@ public class MyBlogController extends HttpServlet {
                 request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
                 addPostView.forward(request, response);
+                break;
+            case ADDCOMMENT:
+                Long postid = Long.getLong(request.getParameter("postid"));
+                Comment newComment = new Comment(Long.MIN_VALUE, request.getParameter("commentbody"));
+                weblogService.addComment(newComment, postid);
+                request.setAttribute("posts", weblogService.getPostings());
+                RequestDispatcher addCommentView = request.getRequestDispatcher("view/index.jsp");
+                addCommentView.forward(request, response);
                 break;
         }
     }

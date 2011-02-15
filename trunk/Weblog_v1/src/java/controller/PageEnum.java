@@ -11,5 +11,6 @@ public enum PageEnum
     VIEWPOST,
     ADDPOST,
     EDITPOST,
-    DELETEPOST
+    DELETEPOST,
+    ADDCOMMENT
 }

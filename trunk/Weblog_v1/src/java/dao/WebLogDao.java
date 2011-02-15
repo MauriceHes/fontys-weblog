@@ -6,10 +6,13 @@
 package dao;
 
 import java.util.List;
+import model.Comment;
 import model.Posting;
 
 public interface WebLogDao {
     void savePosting(Posting p);
     List<Posting> listPostings();
     Posting getPosting(Long id);
+
+    void saveComment(Comment c, Long postid);
 }

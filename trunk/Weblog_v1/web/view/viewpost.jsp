@@ -42,6 +42,16 @@
                                 p.getContent() + "</p><br><p>Posted on: "+ formatter.format(p.getDate()) + "</p>" + cstring + "</div>");
 
                 %>
+                
+                    <form action="addcomment" method="POST">
+                        <div id="postbody">
+                            <label id="labelbody" for="commentbody">Comment:</label>
+                            <textarea name="commentbody" id="commentbody" rows="5"></textarea>
+                            <input type="hidden" name="postid" value="<% out.println(p.getId()); %>" />
+                        </div>
+                        <button id="buttonpost">Add Comment</button>
+                    </form>
+                
             </div>
         </div>
     </body>
