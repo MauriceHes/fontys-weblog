@@ -63,6 +63,14 @@ public class WebLogDaoImp implements WebLogDao {
     };
 
     @Override
+    public void removePosting(Long deleteID){
+        if(deleteID == null) {
+            throw new IllegalArgumentException("DeleteID is null");
+        }
+        this.postings.remove(deleteID);
+    }
+
+    @Override
     public List<Posting> listPostings(){
          return new ArrayList(this.postings.values());
     };

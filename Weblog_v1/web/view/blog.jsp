@@ -23,9 +23,9 @@
         <div id="wrapper">
             <a href="blog"><h1>My Blog - about stuff and things and such</h1></a>
             <div id="leftpane">
-                <div id="about"><h2>ABOUT</h2><p>text</p></div>
-                <div id="pictures"><h2>PICTURES</h2><p>text</p></div>
-                <div id="friends"><h2>FRIENDS</h2><p>text</p></div>
+                <div id="about"><h2>ABOUT</h2><p><a href="admin">Go to adminpage</a></p></div>
+                <div id="pictures"><h2>PICTURES</h2><p>No pictures yet</p></div>
+                <div id="friends"><h2>FRIENDS</h2><p>No friends yet</p></div>
             </div>
             <div id="rightpane">
                 <%
