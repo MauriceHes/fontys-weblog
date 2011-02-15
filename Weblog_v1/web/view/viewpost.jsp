@@ -17,6 +17,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="global.css" rel="stylesheet" type="text/css">
+        <!--<script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
+        <script src="jquery.form.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function()
+            {
+                $('#commentform').ajaxForm(
+                {
+                    dataType: "json",
+                    success: function(data)
+                    {
+                        alert(data);
+                        $("post").append(data);
+                    }
+                })
+           })
+        </script>-->
         <title>A Web Page</title>
     </head>
     <body>
@@ -43,11 +59,13 @@
 
                 %>
                 
-                    <form action="addcomment" method="POST">
+                    <form id="commentform" action="addcomment" method="POST">
                         <div id="postbody">
                             <label id="labelbody" for="commentbody">Comment:</label>
                             <textarea name="commentbody" id="commentbody" rows="5"></textarea>
-                            <input type="hidden" name="postid" value="<% out.println(p.getId()); %>" />
+                            <% 
+                                out.println("<input type='hidden' name='postid' id='postid' value='"+p.getId()+"' />");
+                            %>
                         </div>
                         <button id="buttonpost">Add Comment</button>
                     </form>
