@@ -83,9 +83,9 @@ public class MyBlogController extends HttpServlet {
                 Posting post = weblogService.getPost(postid);
                 Comment newComment = new Comment(post.getNextCommentID(), request.getParameter("commentbody"));
                 post.setComment(newComment);
-                request.setAttribute("post", post);
-                RequestDispatcher addCommentView = request.getRequestDispatcher("view/viewpost.jsp");
-                addCommentView.forward(request, response);
+                //request.setAttribute("post", post);
+                //RequestDispatcher addCommentView = request.getRequestDispatcher("view/viewpost.jsp");
+                //addCommentView.forward(request, response);
                 break;
         }
     }
