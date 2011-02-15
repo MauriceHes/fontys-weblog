@@ -18,7 +18,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="global.css" rel="stylesheet" type="text/css">
         <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
-        <!--<script src="jquery.form.js" type="text/javascript"></script>
+        <script src="scripts.js" type="text/javascript"></script>
+        <!--
         <script type="text/javascript">
             $(function()
             {
@@ -59,7 +60,7 @@
 
                 %>
                 
-                    <form id="commentform" action="addcomment" method="POST">
+                    <form id="commentform" action="" method="POST">
                         <div id="postbody">
                             <label id="labelbody" for="commentbody">Comment:</label>
                             <textarea name="commentbody" id="commentbody" rows="5"></textarea>
