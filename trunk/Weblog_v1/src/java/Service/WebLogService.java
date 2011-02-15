@@ -23,6 +23,10 @@ public class WebLogService {
         webLogDao.savePosting(p);
     }
 
+    public void deletePosting(Long deleteID) {
+        webLogDao.removePosting(deleteID);
+    }
+
     public List<Posting> getPostings() {
         return webLogDao.listPostings();
     }
@@ -30,6 +34,4 @@ public class WebLogService {
     public Posting getPost(long id) {
         return webLogDao.getPosting(id);
     }
-
-    ;
 }

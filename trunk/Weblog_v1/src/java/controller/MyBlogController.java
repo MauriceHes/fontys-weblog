@@ -8,6 +8,7 @@ import Service.WebLogService;
 import dao.WebLogDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,8 @@ public class MyBlogController extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         session = request.getSession();
-        
+
+        //het volgende blok zorgt ervoor dat p de huidige pagina aanduidt
         String uri = request.getRequestURI().replace(request.getContextPath() + "/", "");
         PageEnum p;
 
@@ -61,21 +63,25 @@ public class MyBlogController extends HttpServlet {
         
         switch (p) {
             case BLOG:
+                //haalt alle posts op uit de service en zendt deze door naar blog.jsp
                 request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher indexView = request.getRequestDispatcher("view/blog.jsp");
                 indexView.forward(request, response);
                 break;
             case VIEWPOST:
+                //haal de post op bij het gegeven ID en zendt deze door naar viewpost.jsp
                 request.setAttribute("post", weblogService.getPost(Long.valueOf(request.getParameter("id"))));
                 RequestDispatcher viewPostView = request.getRequestDispatcher("view/viewpost.jsp");
                 viewPostView.forward(request, response);
                 break;
             case ADMIN:
+                //wanneer er geen admin modus is ingesteld, zet hem standaard op basic
                 if(session.getAttribute("mode") == null)
                 {
                     session.setAttribute("mode", "basic");
                 }
 
+                //wanneer gevraagd, verander de admin modus
                 if(request.getParameter("mode") != null)
                 {
                     if(request.getParameter("mode").equals("advanced"))
@@ -87,30 +93,54 @@ public class MyBlogController extends HttpServlet {
                     }
                 }
 
+                //wanneer gevraagd, verwijder de post bij het gegeven ID
+                if(request.getParameter("delete") != null)
+                {
+                    Long deleteID = Long.parseLong(request.getParameter("delete"));
+                    weblogService.deletePosting(deleteID);
+                }
+
+                //wanneer een EDIT gedaan wordt, haal de bijbehorende post op
+                if(request.getParameter("edit") != null)
+                {
+                    Long editID = Long.parseLong(request.getParameter("edit"));
+                    request.setAttribute("editPost", weblogService.getPost(editID));
+                }
+
+                //haalt alle posts op uit de service en zendt deze door naar admin.jsp
                 request.setAttribute("posts", weblogService.getPostings());
                 RequestDispatcher adminView = request.getRequestDispatcher("view/admin.jsp");
                 adminView.forward(request, response);
-
                 break;
             case ADDPOST:
-                if(request.getParameter("action").equals("new")){
+                //addpost kent twee acties
+                //1) "new" voegt een nieuwe post toe, hiervoor is geen ID benodigd
+                //2) "edit" wijzigt de post bij het gegeven ID
+                if(request.getParameter("action").equals("new"))
+                {
                     Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
                     weblogService.addPosting(newPost);
-                }else{
-                    Posting newPost = new Posting(request.getParameter("inputtitle"), request.getParameter("inputbody"));
-                    //weblogService.editPosting(newPost, request.getParameter("postid"));
+                }else if(request.getParameter("action").equals("edit"))
+                {
+                    Posting editPost = weblogService.getPost(Long.parseLong(request.getParameter("postid")));
+                    editPost.setContent(request.getParameter("inputbody"));
+                    editPost.setTitle(request.getParameter("inputtitle"));
                 }
-                    request.setAttribute("posts", weblogService.getPostings());
-                    RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
-                    addPostView.forward(request, response);
+                //haalt alle posts op uit de service en zendt deze door naar admin.jsp
+                request.setAttribute("posts", weblogService.getPostings());
+                RequestDispatcher addPostView = request.getRequestDispatcher("view/admin.jsp");
+                addPostView.forward(request, response);
                 
                 break;
             case ADDCOMMENT:
+                //voegt de comment toe bij het gegeven ID
                 Long postid = Long.parseLong(request.getParameter("postid"));
                 Posting post = weblogService.getPost(postid);
                 Comment newComment = new Comment(post.getNextCommentID(), request.getParameter("commentbody"));
                 post.setComment(newComment);
 
+                //omdat de aanvraag door Ajax gedaan wordt, 
+                //returnen we direct de div waarin de comment staat via de writer
                 PrintWriter out = response.getWriter();
                 String commentbody = request.getParameter("commentbody");
                 try {

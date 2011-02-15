@@ -11,8 +11,7 @@ import model.Posting;
 
 public interface WebLogDao {
     void savePosting(Posting p);
+    void removePosting(Long deleteID);
     List<Posting> listPostings();
-    Posting getPosting(Long id);
-
-    
+    Posting getPosting(Long id);    
 }

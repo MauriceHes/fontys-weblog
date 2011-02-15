@@ -19,30 +19,15 @@
         <link href="global.css" rel="stylesheet" type="text/css">
         <script src="http://code.jquery.com/jquery-1.5.min.js" type="text/javascript"></script>
         <script src="scripts.js" type="text/javascript"></script>
-        <!--
-        <script type="text/javascript">
-            $(function()
-            {
-                $('#commentform').ajaxForm(
-                {
-                    dataType: "json",
-                    success: function(data)
-                    {
-                        alert(data);
-                        $("post").append(data);
-                    }
-                })
-           })
-        </script>-->
         <title>A Web Page</title>
     </head>
     <body>
         <div id="wrapper">
             <a href="blog"><h1>My Blog - about stuff and things and such</h1></a>
             <div id="leftpane">
-                <div id="about"><h2>ABOUT</h2><p>text</p></div>
-                <div id="pictures"><h2>PICTURES</h2><p>text</p></div>
-                <div id="friends"><h2>FRIENDS</h2><p>text</p></div>
+                <div id="about"><h2>ABOUT</h2><p>A basic blog</p></div>
+                <div id="pictures"><h2>PICTURES</h2><p>No pictures yet</p></div>
+                <div id="friends"><h2>FRIENDS</h2><p>No friends yet</p></div>
             </div>
             <div id="rightpane">
                 <%
@@ -59,17 +44,17 @@
                                 p.getContent() + "</p><br><p>Posted on: "+ formatter.format(p.getDate()) + "</p>" + cstring + "</div>");
 
                 %>
-                
-                    <form id="commentform" action="#" method="POST">
-                        <div id="postbody">
-                            <label id="labelbody" for="commentbody">Comment:</label>
-                            <textarea name="commentbody" id="commentbody" rows="5"></textarea>
-                            <% 
-                                out.println("<input type='hidden' name='postid' id='postid' value='"+p.getId()+"' />");
-                            %>
-                        </div>
-                        <button id="buttonpost">Add Comment</button>
-                    </form>
+
+                    <div id="addcomment">
+                        <form id="commentform" action="#" method="POST">
+                                <label id="labelcommentbody" for="commentbody">New comment:</label>
+                                <textarea name="commentbody" id="commentbody" rows="5"></textarea>
+                                <%
+                                    out.println("<input type='hidden' name='postid' id='postid' value='"+p.getId()+"' />");
+                                %>
+                            <button id="buttonpost">Add Comment</button>
+                        </form>
+                    </div>
                 
             </div>
         </div>

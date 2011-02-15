@@ -23,11 +23,11 @@
             <div id="adminpane">
                 <%
                 List<Posting> posts = (List)request.getAttribute("posts");
-                if(request.getParameter("edit") != null)
+                //wanneer een EDIT gedaan wordt, vul de velden van het formulier
+                //en toon de Save Post knop
+                if(request.getAttribute("editPost") != null)
                 {
-                    for(Posting p: posts){
-                        if(p.getId() == Long.parseLong(request.getParameter("edit")))
-                        {
+                    Posting p = (Posting)request.getAttribute("editPost");
                         %>
                             <form action="addpost?action=edit" method="POST">
                                 <div id="posttitle"><label id="labeltitle" for="inputtitle">Title:</label><input type="text" value="<%=p.getTitle()%>" name="inputtitle" id="inputtitle"/>
@@ -38,9 +38,8 @@
                                 <button id="buttonpost">Save Post</button>
                             </form>
                         <%
-                        }
-                    }
-                }else{
+                }else //anders: toon lege velden en de Add Post knop
+                {
                 %>
                 <form action="addpost?action=new" method="POST">
                     <div id="posttitle"><label id="labeltitle" for="inputtitle">Title:</label><input type="text" name="inputtitle" id="inputtitle"/>
@@ -56,6 +55,8 @@
             <div id="lijntje"></div>
             
             <%
+            //als de admin modus op advanced staat, toon de basic knop
+            //en toon een simpele weergave van alle posts
             if(session.getAttribute("mode") == "advanced"){
                     out.println("<a href='admin?mode=basic'>Basic mode</a>");
             %>
@@ -68,7 +69,8 @@
                 %>
             </div>
             <%
-            }else{
+            }else //anders: toon de advanced knop
+            {
                 out.println("<a href='admin?mode=advanced'>Advanced mode</a>");
             }
             %>

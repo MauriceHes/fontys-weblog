@@ -11,6 +11,7 @@ $(document).ready(function() {
             success:
                 function(data) {
                     $('.post').append(data);
+                    $('#commentbody').val('');
 		}
 	});
 	return false;
