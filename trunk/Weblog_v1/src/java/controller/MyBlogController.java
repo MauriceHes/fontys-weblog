@@ -7,6 +7,7 @@ package controller;
 import Service.WebLogService;
 import dao.WebLogDaoImp;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,7 @@ public class MyBlogController extends HttpServlet {
         weblogService = new WebLogService();
     }
 
-
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -83,6 +84,14 @@ public class MyBlogController extends HttpServlet {
                 Posting post = weblogService.getPost(postid);
                 Comment newComment = new Comment(post.getNextCommentID(), request.getParameter("commentbody"));
                 post.setComment(newComment);
+
+                PrintWriter out = response.getWriter();
+                String commentbody = request.getParameter("commentbody");
+                try {
+                    out.println("<div class='comment'>"+commentbody+"</div>");
+                } finally {
+                    out.close();
+                }
                 //request.setAttribute("post", post);
                 //RequestDispatcher addCommentView = request.getRequestDispatcher("view/viewpost.jsp");
                 //addCommentView.forward(request, response);
