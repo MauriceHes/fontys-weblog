@@ -31,5 +31,9 @@ public class WebLogService {
         return webLogDao.getPosting(id);
     }
 
+    public void addComment(Comment c, Long postid) {
+        webLogDao.saveComment(c, postid);
+    }
+
     ;
 }
