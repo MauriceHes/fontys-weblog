@@ -92,9 +92,6 @@ public class MyBlogController extends HttpServlet {
                 } finally {
                     out.close();
                 }
-                //request.setAttribute("post", post);
-                //RequestDispatcher addCommentView = request.getRequestDispatcher("view/viewpost.jsp");
-                //addCommentView.forward(request, response);
                 break;
         }
     }
