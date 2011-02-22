@@ -11,7 +11,7 @@ public class Tweet {
 
     public Tweet() {
     }
-
+    
     public Tweet(String tweet) {
         this.tweet = tweet;
     }

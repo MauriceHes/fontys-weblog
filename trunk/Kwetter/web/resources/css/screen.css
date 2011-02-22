@@ -1,40 +1,93 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-   margin: 0;
-   padding: 0;
-   background-color: #EAECEE;
-   font-family: Verdana, sans-serif;
-   font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #EAECEE;
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
 }
+
 #container {
-   margin: 0 auto;
-   padding: 0 20px 10px 20px;
-   border: 1px solid #666666;
-   width: 865px; /* subtract 40px from banner width for padding */
-   background: #FFFFFF url(#{request.contextPath}/resources/gfx/banner.png) no-repeat;
-   padding-top: 110px;
+    position: relative;
+    width: 990px;
+    height: 100%;
+    margin: 0 auto;
+    overflow: auto;
 }
-#sidebar {
-   font-size: 0.9em;
-   width: 225px;
-   float: right;
-   border: 1px solid #666666;
-   background: #EAECEE;
-   padding: 0 15px 5px 15px;
-}
-#sidebar ul {
-   padding-left: 30px;
-}
-#footer {
-   clear: both;
-   text-align: center;
-   color: #666666;
-   font-size: 0.85em;
-   padding: 3em 0 0 0;
-}
-code {
-   font-size: 1.1em;
-}
-span.invalid {
-   padding-left: 3px;
-   color: red;
-}
+    #left {
+        position: relative;
+        width: 450px;
+        float: left;
+        margin-right: 45px;
+    }
+
+        #S0 {
+            position: relative;
+            width: 380px;
+            clear: both;
+            margin: 10px 25px;
+            padding: 0 10px 10px 10px;
+            border: 1px solid #000;
+        }
+
+        #S1 {
+            position: relative;
+            width: 380px;
+            clear: both;
+            margin: 10px 25px;
+            padding: 0 10px 10px 10px;
+            border: 1px solid #000;
+        }
+
+    #right {
+        position: relative;
+        width: 450px;
+        float: left;
+    }
+
+        #S2 {
+            position: relative;
+            width: 380px;
+            clear: both;
+            margin: 10px 25px;
+            padding: 0 10px 10px 10px;
+            border: 1px solid #000;
+        }
+
+        #S3 {
+            position: relative;
+            width: 380px;
+            clear: both;
+            margin: 10px 25px;
+            padding: 0 10px 10px 10px;
+            border: 1px solid #000;
+        }
+
+        #S4 {
+            position: relative;
+            width: 380px;
+            clear: both;
+            margin: 10px 25px;
+            padding: 0 10px 10px 10px;
+            border: 1px solid #000;
+        }
+
+            table#followingUsers {
+                position: relative;
+                width: 380px;
+                border: 1px solid #000;
+            }
+
+                tr.odd {
+                    background-color: #CCC;
+                    text-align: center;
+                }
+                tr.even {
+                    text-align: center;
+                }

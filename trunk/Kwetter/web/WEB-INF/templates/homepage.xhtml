@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Kwetter</title>
+        <h:outputStylesheet name="css/screen.css"/>
+    </h:head>
+    <h:body>
+        
+        <div id="container">
+
+            <div id="left">
+
+                <div id="S0">
+
+                    <h1>User Info</h1>
+                    plaatje + naam
+                    
+                </div>
+
+                <div id="S1">
+
+                    <h1>Tweets</h1>
+                    <ui:insert name="tweets">
+                        standard tweets
+                    </ui:insert>
+
+                </div>
+
+            </div>
+
+            <div id="right">
+
+                <div id="S2">
+
+                    <h1>Details</h1>
+                    <p>Name: Harrie</p>
+                    <p>Location: locatie</p>
+                    <p>Web: http://fontys.nl</p>
+                    <p>Bio: ajajajajaja</p>
+
+                </div>
+
+                <div id="S3">
+
+                    <h1>Tweet Details</h1>
+                    <p>43 following</p>
+                    <p>20 followers</p>
+                    <p>tweet 3492</p>
+
+                </div>
+
+                <div id="S4">
+
+                    <h1>Following</h1>
+                    <table cellpadding="5" cellspacing="0" id="followingUsers">
+                        <tr class="even">
+                            <td>U1</td>
+                            <td>U2</td>
+                            <td>U3</td>
+                            <td>U4</td>
+                        </tr>
+                        <tr class="odd">
+                            <td>U5</td>
+                            <td>U6</td>
+                            <td>U7</td>
+                            <td>U8</td>
+                        </tr>
+                        <tr class="even">
+                            <td>U9</td>
+                            <td>U10</td>
+                            <td>U11</td>
+                            <td>U12</td>
+                        </tr>
+                        <tr class="odd">
+                            <td>U13</td>
+                            <td>U14</td>
+                            <td>U15</td>
+                            <td>U16</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+                                
+        </div>
+
+    </h:body>
+</html>
