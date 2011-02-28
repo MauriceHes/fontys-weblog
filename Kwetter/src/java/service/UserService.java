@@ -1,15 +1,18 @@
 package service;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import domain.User;
 import domain.Tweet;
+import java.io.Serializable;
+import javax.inject.Named;
 
-
-@Stateless
-public class UserService  {
+@Named
+//@Stateless
+public class UserService implements Serializable  {
 
     private List<User> users;
 
