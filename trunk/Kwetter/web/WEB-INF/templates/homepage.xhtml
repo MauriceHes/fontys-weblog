@@ -8,89 +8,45 @@
         <h:outputStylesheet name="css/screen.css"/>
     </h:head>
     <h:body>
-
         <div id="container">
-
             <div id="left">
-
                 <div id="S0">
-
                     <h1>User Info</h1>
-                    <ui:insert name="userS0">
+                    <ui:insert name="S0">
                         plaatje + naam
                     </ui:insert>
-
                 </div>
 
                 <div id="S1">
-
                     <h1>Tweets</h1>
-                    <ui:insert name="tweets">
+                    <ui:insert name="S1">
                         standard tweets
                     </ui:insert>
-
                 </div>
-
             </div>
 
             <div id="right">
-
                 <div id="S2">
-
                     <h1>Details</h1>
-                    <ui:insert name="userDetails">
-                        <p>Name: Harrie</p>
-                        <p>Location: locatie</p>
-                        <p>Web: http://fontys.nl</p>
-                        <p>Bio: ajajajajaja</p>
+                    <ui:insert name="S2">
+                        user details
                     </ui:insert>
-
                 </div>
 
                 <div id="S3">
-
-                    <h1>Tweet Details</h1>
-                    <p>43 following</p>
-                    <p>20 followers</p>
-                    <p>tweet 3492</p>
-
+                    <h1>Tweet details</h1>
+                    <ui:insert name="S3">
+                        tweet details
+                    </ui:insert>
                 </div>
 
                 <div id="S4">
-
                     <h1>Following</h1>
-                    <table cellpadding="5" cellspacing="0" id="followingUsers">
-                        <tr class="even">
-                            <td>U1</td>
-                            <td>U2</td>
-                            <td>U3</td>
-                            <td>U4</td>
-                        </tr>
-                        <tr class="odd">
-                            <td>U5</td>
-                            <td>U6</td>
-                            <td>U7</td>
-                            <td>U8</td>
-                        </tr>
-                        <tr class="even">
-                            <td>U9</td>
-                            <td>U10</td>
-                            <td>U11</td>
-                            <td>U12</td>
-                        </tr>
-                        <tr class="odd">
-                            <td>U13</td>
-                            <td>U14</td>
-                            <td>U15</td>
-                            <td>U16</td>
-                        </tr>
-                    </table>
-
+                    <ui:insert name="S4">
+                        following
+                    </ui:insert>
                 </div>
-
             </div>
-
         </div>
-
     </h:body>
 </html>
