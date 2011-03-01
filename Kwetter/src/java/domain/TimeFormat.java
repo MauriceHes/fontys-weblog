@@ -9,11 +9,8 @@ import java.util.Date;
  */
 public class TimeFormat
 {
-    public TimeFormat()
-    {
-    }
 
-    public String stringDifferenceFromNow(Date fromDate)
+    public static String stringDifferenceFromNow(Date fromDate)
     {
         Calendar calFrom = Calendar.getInstance();
         calFrom.setTime(fromDate);
