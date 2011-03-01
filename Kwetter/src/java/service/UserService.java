@@ -84,13 +84,14 @@ public class UserService implements Serializable  {
 
         u2.addFollowing(u1);
 
+        u5.addFollowing(u1);
+
         Tweet t1 = new Tweet("Hallo", new Date(), "PC");
         Tweet t2 = new Tweet("Hallo again", new Date(), "PC");
         Tweet t3 = new Tweet("Hallo where are you", new Date(), "PC");
         u1.addTweet(t1);
         u1.addTweet(t2);
         u1.addTweet(t3);
-
 
         users.add(u1);
         users.add(u2);

@@ -20,6 +20,15 @@ body {
     margin: 0 auto;
     overflow: auto;
 }
+    #search {
+        position: relative;
+        width:895px;
+        height:50px;
+        margin-left:25px;
+        margin-top:10px;
+        border: 1px solid #000;
+    }
+
     #left {
         position: relative;
         width: 450px;
