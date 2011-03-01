@@ -8,10 +8,8 @@ import javax.ejb.Stateless;
 import domain.User;
 import domain.Tweet;
 import java.io.Serializable;
-import javax.inject.Named;
 
-@Named
-//@Stateless
+@Stateless
 public class UserService implements Serializable  {
 
     private List<User> users;
@@ -47,9 +45,8 @@ public class UserService implements Serializable  {
         return users.size();
     }
 
-
     private void initUsers(){
-        User u1 = new User("Hans","http","geboren 1");
+        User u1 = new User("Hans de Frikandel","http://www.google.nl","geboren 1");
         User u2 = new User("Frank","httpF","geboren 2");
         User u3 = new User("Tom","httpT","geboren 3");
         User u4 = new User("Sjaak","httpS","geboren 4");

@@ -8,7 +8,7 @@
         <h:outputStylesheet name="css/screen.css"/>
     </h:head>
     <h:body>
-        
+
         <div id="container">
 
             <div id="left">
@@ -16,8 +16,10 @@
                 <div id="S0">
 
                     <h1>User Info</h1>
-                    plaatje + naam
-                    
+                    <ui:insert name="userS0">
+                        plaatje + naam
+                    </ui:insert>
+
                 </div>
 
                 <div id="S1">
@@ -36,10 +38,12 @@
                 <div id="S2">
 
                     <h1>Details</h1>
-                    <p>Name: Harrie</p>
-                    <p>Location: locatie</p>
-                    <p>Web: http://fontys.nl</p>
-                    <p>Bio: ajajajajaja</p>
+                    <ui:insert name="userDetails">
+                        <p>Name: Harrie</p>
+                        <p>Location: locatie</p>
+                        <p>Web: http://fontys.nl</p>
+                        <p>Bio: ajajajajaja</p>
+                    </ui:insert>
 
                 </div>
 
@@ -85,7 +89,7 @@
                 </div>
 
             </div>
-                                
+
         </div>
 
     </h:body>

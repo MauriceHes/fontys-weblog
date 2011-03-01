@@ -1,38 +1,35 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/WEB-INF/templates/homepage.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/homepage.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="userS0">
+        <h:outputText value="#{userBean.user.name}"></h:outputText>
+    </ui:define>
+
+    <ui:define name="userDetails">
+        
+        <p>Name: #{userBean.user.name}</p>
+        <p>Location: </p>
+        <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
+        <p>Bio: #{userBean.user.bio}</p>
+    </ui:define>
+
     <ui:define name="tweets">
 
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <td>
-                    <p>Tweet one</p>
-                    <p>5 seconds ago </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>Tweet one</p>
-                    <p>5 seconds ago </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>Tweet one</p>
-                    <p>5 seconds ago </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>Tweet one</p>
-                    <p>5 seconds ago </p>
-                </td>
-            </tr>
-        </table>
-        
+        <f:view>
+            <h:form>
+                <h:dataTable value="#{tweetBean.tweets}" var="item">
+                    <h:column>
+                        <p>#{item.tweet}</p>
+                        <p>#{item.datum}</p>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
     </ui:define>
 </ui:composition>
 

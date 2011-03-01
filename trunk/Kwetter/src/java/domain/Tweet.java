@@ -29,9 +29,10 @@ public class Tweet {
     public void setTweet(String tweet) {
         this.tweet = tweet;
     }
-
-    public Date getDatum() {
-        return postDate;
+    
+    public String getDatum() {
+        //return postDate;
+        return TimeFormat.stringDifferenceFromNow(postDate);
     }
 
     public void setDatum(Date datum) {
