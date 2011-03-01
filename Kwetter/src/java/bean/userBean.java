@@ -8,6 +8,7 @@ package bean;
 import domain.User;
 import javax.ejb.EJB;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import service.UserService;
 
@@ -31,7 +32,13 @@ public class userBean {
     }
 
     public User getUser() {
-        return service.findAll().get(0);
+        FacesContext context = FacesContext.getCurrentInstance();
+        String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
+        if(service.findUserByName(paramUser) != null)
+        {
+            return service.findUserByName(paramUser);
+        }
+        return service.findUserByName("default");
     }
 
 }

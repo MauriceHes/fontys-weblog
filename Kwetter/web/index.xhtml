@@ -5,20 +5,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/WEB-INF/templates/homepage.xhtml"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ui:define name="userS0">
+    <ui:define name="S0">
         <h:outputText value="#{userBean.user.name}"></h:outputText>
     </ui:define>
 
-    <ui:define name="userDetails">
-        
-        <p>Name: #{userBean.user.name}</p>
-        <p>Location: </p>
-        <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
-        <p>Bio: #{userBean.user.bio}</p>
-    </ui:define>
-
-    <ui:define name="tweets">
-
+    <ui:define name="S1">
         <f:view>
             <h:form>
                 <h:dataTable value="#{tweetBean.tweets}" var="item">
@@ -29,7 +20,53 @@
                 </h:dataTable>
             </h:form>
         </f:view>
+    </ui:define>
 
+    <ui:define name="S2">
+        <p>Name: #{userBean.user.name}</p>
+        <p>Location: </p>
+        <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
+        <p>Bio: #{userBean.user.bio}</p>
+    </ui:define>
+
+    <ui:define name="S3">
+        <p>#{statsBean.followingCount} following</p>
+        <p>#{statsBean.followerCount} followers</p>
+        <p>#{statsBean.tweetCount} tweets</p>
+    </ui:define>
+
+    <ui:define name="S4">
+        <table cellpadding="5" cellspacing="0" id="followingUsers">
+            <h:dataTable value="#{followBean.following}" var="item">
+                <h:column>
+                    <a href="index.jsf?user=#{item.name}">#{item.name}</a>
+                </h:column>
+            </h:dataTable>
+            <!--<tr class="even">
+                <td>U1</td>
+                <td>U2</td>
+                <td>U3</td>
+                <td>U4</td>
+            </tr>
+            <tr class="odd">
+                <td>U5</td>
+                <td>U6</td>
+                <td>U7</td>
+                <td>U8</td>
+            </tr>
+            <tr class="even">
+                <td>U9</td>
+                <td>U10</td>
+                <td>U11</td>
+                <td>U12</td>
+            </tr>
+            <tr class="odd">
+                <td>U13</td>
+                <td>U14</td>
+                <td>U15</td>
+                <td>U16</td>
+            </tr>-->
+        </table>
     </ui:define>
 </ui:composition>
 

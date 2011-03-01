@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import service.UserService;
 
 /**
@@ -31,7 +32,12 @@ public class tweetBean {
     }
 
     public Collection<Tweet> getTweets() {
-        return service.findAll().get(0).getTweets();
+        FacesContext context = FacesContext.getCurrentInstance();
+        String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
+        if(service.findUserByName(paramUser) != null)
+        {
+            return service.findUserByName(paramUser).getTweets();
+        }
+        return service.findUserByName("default").getTweets();
     }
-
 }
