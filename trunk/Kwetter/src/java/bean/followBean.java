@@ -37,4 +37,14 @@ public class followBean {
         }
         return service.findUserByName("default").getFollowing();
     }
+
+    public Collection<User> getFollowers() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
+        if(service.findUserByName(paramUser) != null)
+        {
+            return service.getFollowers(paramUser);
+        }
+        return service.getFollowers("default");
+    }
 }

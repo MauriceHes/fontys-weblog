@@ -10,13 +10,12 @@
     </ui:define>
 
     <ui:define name="S1">
-        <h1>Tweets</h1>
+        <h1>Following</h1>
         <f:view>
             <h:form>
-                <h:dataTable value="#{tweetBean.tweets}" var="item">
+                <h:dataTable value="#{followBean.following}" var="item">
                     <h:column>
-                        <p>#{item.tweet}</p>
-                        <p>#{item.datum}</p>
+                        <p><a href="index.jsf?user=#{item.name}">#{item.name}</a></p>
                     </h:column>
                 </h:dataTable>
             </h:form>
@@ -31,9 +30,9 @@
     </ui:define>
 
     <ui:define name="S3">
-        <p><a href="following.jsf?user=#{userBean.user.name}">#{statsBean.followingCount} following</a></p>
+        <p>#{statsBean.followingCount} following</p>
         <p><a href="followers.jsf?user=#{userBean.user.name}">#{statsBean.followerCount} followers</a></p>
-        <p>#{statsBean.tweetCount} tweets</p>
+        <p><a href="index.jsf?user=#{userBean.user.name}">#{statsBean.tweetCount} tweets</a></p>
     </ui:define>
 
     <ui:define name="S4">
@@ -46,4 +45,3 @@
         </table>
     </ui:define>
 </ui:composition>
-
