@@ -14,6 +14,7 @@ import java.util.Collection;
 public class UserService implements Serializable  {
 
     private List<User> users;
+    
 
 
     public UserService() {
@@ -66,6 +67,29 @@ public class UserService implements Serializable  {
                 //als de naam gelijk is aan degene die wij zoeken, voeg User u toe aan de lijst
                 if(follower.getName().equals(name)) {
                     temp.add(u);
+                }
+            }
+        }
+        return temp;
+    }
+
+    
+    
+    public Collection<Tweet> getSearchedTweets(String filter) {
+        Collection<Tweet> temp = new ArrayList();
+        if(filter != null)
+        {            
+            //doorloop alle users
+            for(User u:users)
+            {
+                //haal de tweets op bij User u
+                Collection<Tweet> tweets = u.getTweets();
+                //doorloop de tweets
+                for(Tweet t: tweets) {
+                    //als filter in de tweet staat, voeg hem toe aan de temp lijst
+                    if(t.getTweet().toLowerCase().contains(filter)) {
+                        temp.add(t);
+                    }
                 }
             }
         }

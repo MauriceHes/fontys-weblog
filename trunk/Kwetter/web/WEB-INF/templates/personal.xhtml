@@ -9,14 +9,16 @@
     </h:head>
     <h:body>
         <div id="container">
-            <div id="search">
-                SEARCH
+            <div id="header">
+                <ui:insert name="search">
+                    SEARCH
+                </ui:insert>
             </div>
             <div id="left">
                 <div id="S0">
                     <h1>What's happening</h1>
                     <ui:insert name="S0">
-                        plaatje + naam
+                        tweet invulveld
                     </ui:insert>
                 </div>
 
@@ -29,23 +31,24 @@
 
             <div id="right">
                 <div id="S2">
-                    <h1>Details</h1>
+                    <h1>Your tweets</h1>
                     <ui:insert name="S2">
-                        user details
+                        tweets
                     </ui:insert>
                 </div>
 
                 <div id="S3">
-                    <h1>Tweet details</h1>
+                    <h1>Following / Followers</h1>
                     <ui:insert name="S3">
-                        tweet details
+                        following: 1 followers: 1
                     </ui:insert>
                 </div>
 
                 <div id="S4">
-                    <h1>Following</h1>
+                    <h1>Trends</h1>
                     <ui:insert name="S4">
-                        following
+                        <p>#bla</p>
+                        <p>#bla</p>
                     </ui:insert>
                 </div>
             </div>

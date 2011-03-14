@@ -13,6 +13,10 @@ body {
     font-size: 11px;
 }
 
+a {
+    color:blue;
+}
+
 #container {
     position: relative;
     width: 990px;
@@ -20,7 +24,7 @@ body {
     margin: 0 auto;
     overflow: auto;
 }
-    #search {
+    #header {
         position: relative;
         width:895px;
         height:50px;
