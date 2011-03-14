@@ -27,10 +27,6 @@ public class userBean {
     public userBean() {
     }
 
-    public int getCount() {
-        return service.count();
-    }
-
     public User getUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");

@@ -5,22 +5,24 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/WEB-INF/templates/homepage.xhtml"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="login">
+        <a href="profile.jsf?user=#{userBean.user.name}">LOGIN</a>
+    </ui:define>
+
     <ui:define name="S0">
         <h:outputText value="#{userBean.user.name}"></h:outputText>
     </ui:define>
 
     <ui:define name="S1">
         <h1>Tweets</h1>
-        <f:view>
-            <h:form>
-                <h:dataTable value="#{tweetBean.tweets}" var="item">
-                    <h:column>
-                        <p>#{item.tweet}</p>
-                        <p>#{item.datum}</p>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </f:view>
+        <h:form>
+            <h:dataTable value="#{tweetBean.tweets}" var="item">
+                <h:column>
+                    <p>#{item.tweet}</p>
+                    <p>#{item.datum}</p>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 
     <ui:define name="S2">
