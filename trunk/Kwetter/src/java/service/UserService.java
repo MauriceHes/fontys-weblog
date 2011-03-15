@@ -13,9 +13,7 @@ import java.util.Collection;
 @Stateless
 public class UserService implements Serializable  {
 
-    private List<User> users;
-    
-
+    private List<User> users;  
 
     public UserService() {
         users = new ArrayList();
@@ -75,8 +73,7 @@ public class UserService implements Serializable  {
     
     public Collection<Tweet> getSearchedTweets(String filter) {
         Collection<Tweet> temp = new ArrayList();
-        if(filter != null)
-        {            
+        if(filter != null) {            
             //doorloop alle users
             for(User u:users)
             {
@@ -91,6 +88,17 @@ public class UserService implements Serializable  {
                 }
             }
         }
+        return temp;
+    }
+
+    public void addTweetToUser(String user, String tweet) {
+        User u = findUserByName(user);
+        u.addTweet(new Tweet(tweet, new Date(), "PC"));
+    }
+    
+    public Collection<String> getTrends(String filter) {
+        Collection<String> temp = new ArrayList();
+        
         return temp;
     }
 

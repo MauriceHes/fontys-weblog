@@ -50,7 +50,7 @@ public class tweetBean {
             System.out.println(user);
             if(user != null)
             {
-                service.findUserByName(user).addTweet(new Tweet(tweet, new Date(), "PC"));
+                service.addTweetToUser(user, tweet);
             }
         }
     }
