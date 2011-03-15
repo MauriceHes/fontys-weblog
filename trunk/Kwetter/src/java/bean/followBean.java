@@ -11,7 +11,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import service.UserService;
+import service.IUserService;
 
 /**
  *
@@ -22,7 +22,7 @@ import service.UserService;
 public class followBean {
 
     @EJB
-    private UserService service;
+    private IUserService service;
 
     /** Creates a new instance of followBean */
     public followBean() {
