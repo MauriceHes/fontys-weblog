@@ -19,12 +19,13 @@ import java.util.Iterator;
 public class UserService implements Serializable  {
 
     private List<User> users;
-    private Collection<Trend> trends;
+    //private Collection<Trend> trends;
     private HashMap<String, Long> trendMap;
 
     public UserService() {
         users = new ArrayList();
-        trends = new ArrayList();
+        trendMap = new HashMap<String, Long>();
+        //trends = new ArrayList();
         initUsers();
     }
 
