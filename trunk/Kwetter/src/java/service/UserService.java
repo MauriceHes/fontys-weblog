@@ -1,6 +1,7 @@
 package service;
 
 
+import domain.Trend;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,14 +10,21 @@ import domain.User;
 import domain.Tweet;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 
 @Stateless
 public class UserService implements Serializable  {
 
-    private List<User> users;  
+    private List<User> users;
+    private Collection<Trend> trends;
+    private HashMap<String, Long> trendMap;
 
     public UserService() {
         users = new ArrayList();
+        trends = new ArrayList();
         initUsers();
     }
 
@@ -94,12 +102,60 @@ public class UserService implements Serializable  {
     public void addTweetToUser(String user, String tweet) {
         User u = findUserByName(user);
         u.addTweet(new Tweet(tweet, new Date(), "PC"));
+
+        String[] words = tweet.split(" ");
+        for(String s: words) {
+            if(s.startsWith("#")) {
+                if(trendMap.containsKey(s)) {
+                    trendMap.put(s, trendMap.get(s) + 1);
+                }
+                else {
+                    trendMap.put(s, 1L);
+                }
+            }
+        }
     }
     
-    public Collection<String> getTrends(String filter) {
-        Collection<String> temp = new ArrayList();
-        
+    public List<String> getTrends(String filter) {
+        List<String> temp = new ArrayList();
+        //sorteer de hashmap op value en doorloop hem
+        Iterator i = sortByValue(trendMap).iterator();
+        int teller = 0;
+        while(teller < 5) //haal de bovenste vijf trends op
+        {
+            if(i.hasNext()) {
+                temp.add((String) i.next());
+                teller ++;
+            }
+            else {
+                break;
+            }            
+        }
         return temp;
+    }
+
+    public List<String> sortByValue(final HashMap m) {
+        List<String> keys = new ArrayList();
+        keys.addAll(m.keySet());
+        Collections.sort(keys, new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                Object v1 = m.get(o1);
+                Object v2 = m.get(o2);
+                if (v1 == null) {
+                    return (v2 == null) ? 0 : 1;
+                }
+                else if (v1 instanceof Comparable) {
+                    return ((Comparable) v1).compareTo(v2);
+                }
+                else {
+                    return 0;
+                }
+
+            }
+        });
+        return keys;
     }
 
     private void initUsers(){
@@ -116,9 +172,9 @@ public class UserService implements Serializable  {
 
         u5.addFollowing(u1);
 
-        Tweet t1 = new Tweet("Hallo", new Date(), "PC");
-        Tweet t2 = new Tweet("Hallo again", new Date(), "PC");
-        Tweet t3 = new Tweet("Hallo where are you", new Date(), "PC");
+        Tweet t1 = new Tweet("#hallo", new Date(), "PC");
+        Tweet t2 = new Tweet("#hallo #again #you", new Date(), "PC");
+        Tweet t3 = new Tweet("#hallo #where are #you", new Date(), "PC");
         u1.addTweet(t1);
         u1.addTweet(t2);
         u1.addTweet(t3);
