@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/personal.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="search">
+        <h:form>
+            <p>Search</p>
+            <h:inputText value="#{searchBean.filter}" id="filter">
+                <f:ajax event="keyup" execute="filter" render=":searchForm"/>
+            </h:inputText>
+        </h:form>        
+    </ui:define>
+    <ui:define name="S0">
+        <h:form>
+            <h:inputText value="#{tweetBean.tweet}" id="tweet"></h:inputText>
+            <h:commandButton value="Submit" id="tweetButton" action="#{tweetBean.postNewTweet('hans')}">
+                <f:ajax event="action" execute="tweet"/>
+            </h:commandButton>            
+        </h:form>
+    </ui:define>
+    <ui:define name="S1">
+        <div id="tabs">
+            <ul>
+                <li><a href="#search">Search</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#mentions">Mentions</a></li>
+            </ul>
+            <div id="search">
+                <h:form id="searchForm">
+                    <h:dataTable value="#{searchBean.searchedTweets}" var="tweet">
+                        <h:column>#{tweet.tweet}</h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div id="timeline">                
+                <h:form id="tweetForm">
+                    <h:dataTable value="#{tweetBean.tweets}" var="item">
+                        <h:column>
+                            <p>#{item.tweet}</p>
+                            <p>#{item.datum}</p>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div id="mentions">
+                blaat
+                <!--<h:form id="tweetForm">
+                    <h:dataTable value="{tweetBean.getTweets}" var="tweet">
+                        <h:column>{tweet.tweet}</h:column>
+                    </h:dataTable>
+                </h:form>-->
+            </div>
+
+        </div>
+    </ui:define>
+    <ui:define name="S2">
+        <p>Name: #{userBean.user.name}</p>
+        <p>Location: </p>
+        <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
+        <p>Bio: #{userBean.user.bio}</p>
+    </ui:define>
+    <ui:define name="S4">
+        <h:form>
+            <h:dataTable value="#{tweetBean.trends}" var="item">
+                <h:column><p>#{item.toString}</p></h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
