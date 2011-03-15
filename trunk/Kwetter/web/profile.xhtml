@@ -24,13 +24,24 @@
     <ui:define name="S1">
         <div id="tabs">
             <ul>
+                <li><a href="#search">Search</a></li>
                 <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#mentions">Mentions</a></li>
             </ul>
-            <div id="timeline">
+            <div id="search">
                 <h:form id="searchForm">
                     <h:dataTable value="#{searchBean.searchedTweets}" var="tweet">
                         <h:column>#{tweet.tweet}</h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div id="timeline">                
+                <h:form id="tweetForm">
+                    <h:dataTable value="#{tweetBean.tweets}" var="item">
+                        <h:column>
+                            <p>#{item.tweet}</p>
+                            <p>#{item.datum}</p>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
             </div>
@@ -50,5 +61,12 @@
         <p>Location: </p>
         <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
         <p>Bio: #{userBean.user.bio}</p>
+    </ui:define>
+    <ui:define name="S4">
+        <h:form>
+            <h:dataTable value="#{tweetBean.trends}" var="item">
+                <h:column><p>#{item.toString}</p></h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
