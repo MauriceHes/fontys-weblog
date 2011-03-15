@@ -71,9 +71,7 @@ public class UserService implements Serializable  {
             }
         }
         return temp;
-    }
-
-    
+    }   
     
     public Collection<Tweet> getSearchedTweets(String filter) {
         Collection<Tweet> temp = new ArrayList();
