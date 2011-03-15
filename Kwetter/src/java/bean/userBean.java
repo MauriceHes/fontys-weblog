@@ -10,7 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import service.UserService;
+import service.IUserService;
 
 /**
  *
@@ -21,7 +21,7 @@ import service.UserService;
 public class userBean {
 
     @EJB
-    private UserService service;
+    private IUserService service;
  
     /** Creates a new instance of userBean */
     public userBean() {

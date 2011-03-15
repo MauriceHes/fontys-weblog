@@ -1,15 +1,24 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-public class User  {
+@Entity
+public class User implements Serializable  {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
+    private int id;
     private String name;
     private String web;
     private String bio;
 
+    
     private Collection<User> following = new ArrayList();
     private Collection<Tweet> tweets = new ArrayList();
 

@@ -1,7 +1,6 @@
 package service;
 
 
-import domain.Trend;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @Stateless
-public class UserService implements Serializable  {
+public class UserService implements IUserService, Serializable  {
 
     private List<User> users;
     //private Collection<Trend> trends;
@@ -29,26 +28,27 @@ public class UserService implements Serializable  {
         initUsers();
     }
 
+    @Override
     public void create(User user) {
         users.add(user);
     }
 
+    @Override
     public void edit(User user) {
         //nothing has to be done now
     }
 
+    @Override
     public void remove(User user) {
         users.remove(user);
     }
 
+    @Override
     public List<User> findAll() {
         return users;
     }
 
-    public User find(Object id) {
-       throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    @Override
     public User findUserByName(String name) {
         for(User u: users) {
             if(u.getName().equals(name)) {
@@ -59,10 +59,12 @@ public class UserService implements Serializable  {
     }
 
 
+    @Override
     public int count() {
         return users.size();
     }
 
+    @Override
     public Collection<User> getFollowers(String name) {
         Collection<User> temp = new ArrayList<User>();
         //doorloop alle users
@@ -79,7 +81,8 @@ public class UserService implements Serializable  {
         }
         return temp;
     }   
-    
+
+    @Override
     public Collection<Tweet> getSearchedTweets(String filter) {
         Collection<Tweet> temp = new ArrayList();
         if(filter != null) {            
@@ -100,6 +103,7 @@ public class UserService implements Serializable  {
         return temp;
     }
 
+    @Override
     public void addTweetToUser(String user, String tweet) {
         User u = findUserByName(user);
         u.addTweet(new Tweet(tweet, new Date(), "PC"));
@@ -116,7 +120,8 @@ public class UserService implements Serializable  {
             }
         }
     }
-    
+
+    @Override
     public List<String> getTrends() {
         List<String> temp = new ArrayList();
         //sorteer de hashmap op value en doorloop hem

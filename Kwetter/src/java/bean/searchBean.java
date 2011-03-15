@@ -10,7 +10,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import service.UserService;
+import service.IUserService;
 
 /**
  *
@@ -21,7 +21,7 @@ import service.UserService;
 public class searchBean {
 
     @EJB
-    private UserService service;
+    private IUserService service;
     private String filter;
 
     /** Creates a new instance of searchBean */
