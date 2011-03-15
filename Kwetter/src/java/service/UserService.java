@@ -116,7 +116,7 @@ public class UserService implements Serializable  {
         }
     }
     
-    public List<String> getTrends(String filter) {
+    public List<String> getTrends() {
         List<String> temp = new ArrayList();
         //sorteer de hashmap op value en doorloop hem
         Iterator i = sortByValue(trendMap).iterator();
