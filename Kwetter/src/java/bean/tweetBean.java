@@ -55,6 +55,10 @@ public class tweetBean {
         }
     }
 
+    public List<String> getTrends() {
+        return service.getTrends();
+    }
+
     /*public String getActiveUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         activeUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
