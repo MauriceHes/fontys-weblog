@@ -148,7 +148,7 @@ public class UserService implements Serializable  {
                     return (v2 == null) ? 0 : 1;
                 }
                 else if (v1 instanceof Comparable) {
-                    return ((Comparable) v1).compareTo(v2);
+                    return ((Comparable) v2).compareTo(v1);
                 }
                 else {
                     return 0;
@@ -185,5 +185,10 @@ public class UserService implements Serializable  {
         users.add(u3);
         users.add(u4);
         users.add(u5);
+
+        trendMap.put("#hallo", 3L);
+        trendMap.put("#you", 2L);
+        trendMap.put("#again", 1L);
+        trendMap.put("#where", 1L);
     }
 }

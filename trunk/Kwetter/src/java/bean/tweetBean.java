@@ -47,7 +47,8 @@ public class tweetBean {
     public void postNewTweet(String user) {
         if((tweet != null) && (tweet.length() > 0))
         {
-            System.out.println(user);
+            System.out.println("User: " + user);
+            System.out.println("Tweet: " + tweet);
             if(user != null)
             {
                 service.addTweetToUser(user, tweet);
