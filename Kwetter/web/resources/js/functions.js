@@ -1,4 +1,4 @@
 $(function() {
-    $("#tabs").tabs();
+    $("#tabs").tabs({ cache:false });
 });
 
