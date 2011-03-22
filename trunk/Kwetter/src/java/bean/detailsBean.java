@@ -9,6 +9,7 @@ import domain.User;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import service.IUserService;
 
 /**
@@ -19,7 +20,7 @@ import service.IUserService;
 @RequestScoped
 public class detailsBean {
 
-    @EJB
+    @Inject
     private IUserService service;
 
     /** Creates a new instance of detailsBean */

@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import service.IUserService;
 
 /**
@@ -20,7 +21,8 @@ import service.IUserService;
 @RequestScoped
 public class searchBean {
 
-    @EJB
+
+    @Inject
     private IUserService service;
     private String filter;
 

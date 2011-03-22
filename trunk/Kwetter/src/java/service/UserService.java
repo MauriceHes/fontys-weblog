@@ -13,7 +13,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.enterprise.inject.Alternative;
 
+@Alternative
 @Stateless
 public class UserService implements IUserService, Serializable  {
 
@@ -164,7 +166,8 @@ public class UserService implements IUserService, Serializable  {
         return keys;
     }
 
-    private void initUsers(){
+    @Override
+    public void initUsers(){
         User u1 = new User("hans","http://www.google.nl","geboren 1");
         User u2 = new User("frank","httpF","geboren 2");
         User u3 = new User("tom","httpT","geboren 3");

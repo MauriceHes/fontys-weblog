@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import service.IUserService;
 
 
@@ -25,7 +26,7 @@ import service.IUserService;
 @RequestScoped
 public class tweetBean {
 
-    @EJB
+    @Inject
     private IUserService service;
     private String tweet;
     private String activeUser;

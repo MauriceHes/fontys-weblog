@@ -36,4 +36,6 @@ public interface IUserService {
 
     public List<String> getTrends();
 
+    public void initUsers();
+
 }
