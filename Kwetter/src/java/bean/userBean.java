@@ -6,9 +6,11 @@
 package bean;
 
 import domain.User;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import service.IUserService;
 
@@ -20,11 +22,18 @@ import service.IUserService;
 @RequestScoped
 public class userBean {
 
-    @EJB
+    @Inject
     private IUserService service;
  
     /** Creates a new instance of userBean */
-    public userBean() {
+    public userBean() {        
+
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println(service == null);
+        service.initUsers();
     }
 
     public User getUser() {
