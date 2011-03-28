@@ -39,7 +39,7 @@ public class tweetBean {
     public Collection<Tweet> getTweets() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+        if(paramUser != null)
         {
             return service.findUserByName(paramUser).getTweets();
         }

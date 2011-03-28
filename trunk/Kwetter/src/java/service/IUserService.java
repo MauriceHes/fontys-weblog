@@ -30,6 +30,8 @@ public interface IUserService {
 
     public Collection<User> getFollowers(String name);
 
+    public Collection<User> getFollowing(String name);
+
     public Collection<Tweet> getSearchedTweets(String filter);
 
     public void addTweetToUser(String user, String tweet);

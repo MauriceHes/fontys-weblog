@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Alternative;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,11 @@ public class UserServiceJPA implements IUserService, Serializable {
 
     public UserServiceJPA() {
         emf = Persistence.createEntityManagerFactory("KwetterPU");
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        initUsers();
     }
 
     @Override
@@ -66,7 +72,7 @@ public class UserServiceJPA implements IUserService, Serializable {
     public User findUserByName(String name) {
         EntityManager em = emf.createEntityManager();
 
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.name = '"+ name +"'", User.class);
+        TypedQuery<User> query = em.createQuery("SELECT t FROM Tweeter t WHERE t.name = '"+ name +"'", User.class);
         User user = query.getSingleResult();
         
         em.close();
@@ -77,7 +83,7 @@ public class UserServiceJPA implements IUserService, Serializable {
     public int count() {
         EntityManager em = emf.createEntityManager();
 
-        Query query = em.createQuery("SELECT COUNT(*) as c FROM User");
+        Query query = em.createQuery("SELECT COUNT(*) as c FROM Tweeter");
 
         int count = ((Long)query.getSingleResult()).intValue();
         //int count = (Integer)query.getSingleResult(); //voor als hij wel een int terug geeft
@@ -89,13 +95,14 @@ public class UserServiceJPA implements IUserService, Serializable {
     @Override
     public Collection<User> getFollowers(String name) {
         EntityManager em = emf.createEntityManager();
+        TypedQuery<User> query = em.createQuery("SELECT t FROM Tweeter t, Follower f WHERE f.follower = t.name AND f.following = '"+ name + "'", User.class);
+        return query.getResultList();
+    }
 
-        //TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE u.name = '"+ name + "'", User.class);
-        //User user = query.getSingleResult();
-        //em.close();
-
-        //TODO controle op juistheid query
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u, Follower f WHERE f.follower = user.name AND f.follwing = "+ name + "'", User.class);
+    @Override
+    public Collection<User> getFollowing(String name) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<User> query = em.createQuery("SELECT t FROM Tweeter t, Follower f WHERE f.following = t.name AND f.follower = '"+ name + "'", User.class);
         return query.getResultList();
     }
 
@@ -121,20 +128,28 @@ public class UserServiceJPA implements IUserService, Serializable {
         User u3 = new User("tom","httpT","geboren 3");
         User u4 = new User("sjaak","httpS","geboren 4");
         User u5 = new User("default", "httpD", "geboren 5");
-        /*u1.addFollowing(u2);
+
+        u1.addFollowing(u2);
+        u2.addFollower(u1);
+
         u1.addFollowing(u3);
+        u3.addFollower(u1);
+
         u1.addFollowing(u4);
+        u4.addFollower(u1);
 
         u2.addFollowing(u1);
+        u1.addFollower(u2);
 
         u5.addFollowing(u1);
+        u1.addFollower(u5);
 
         Tweet t1 = new Tweet("#hallo", new Date(), "PC");
         Tweet t2 = new Tweet("#hallo #again #you", new Date(), "PC");
         Tweet t3 = new Tweet("#hallo #where are #you", new Date(), "PC");
         u1.addTweet(t1);
         u1.addTweet(t2);
-        u1.addTweet(t3);*/
+        u1.addTweet(t3);
 
         create(u1);
         create(u2);

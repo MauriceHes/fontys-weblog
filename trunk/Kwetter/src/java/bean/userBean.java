@@ -30,16 +30,11 @@ public class userBean {
 
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        System.out.println(service == null);
-        service.initUsers();
-    }
-
     public User getUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+        System.out.println(paramUser);
+        if(paramUser != null)
         {
             return service.findUserByName(paramUser);
         }
