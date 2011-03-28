@@ -32,7 +32,7 @@ public class followBean {
     public Collection<User> getFollowing() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+         if(paramUser != null)
         {
             return service.findUserByName(paramUser).getFollowing();
         }
@@ -42,7 +42,7 @@ public class followBean {
     public Collection<User> getFollowers() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+         if(paramUser != null)
         {
             return service.getFollowers(paramUser);
         }

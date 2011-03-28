@@ -6,8 +6,10 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-@Entity
+@Entity (name="Tweeter")
 public class User implements Serializable  {
     private static final long serialVersionUID = 1L;
 
@@ -18,9 +20,14 @@ public class User implements Serializable  {
     private String web;
     private String bio;
 
-    
+    @ManyToMany
     private Collection<User> following = new ArrayList();
-    private Collection<Tweet> tweets = new ArrayList();
+
+    @ManyToMany
+    private Collection<User> followers = new ArrayList();
+    
+    @OneToMany
+    private Collection<Tweet> tweets = new ArrayList();    
 
     public User() {
     }
@@ -67,6 +74,14 @@ public class User implements Serializable  {
         this.following = following;
     }
 
+    public Collection<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Collection<User> followers) {
+        this.followers = followers;
+    }
+
     public Collection<Tweet> getTweets() {
         return tweets;
     }
@@ -75,11 +90,13 @@ public class User implements Serializable  {
         this.tweets = tweets;
     }
 
-
-    public Boolean addFollowing(User following){
+    public Boolean addFollowing(User following) {
         return this.following.add(following);
     }
 
+    public Boolean addFollower(User follower) {
+        return this.followers.add(follower);
+    }
   
     public Boolean addTweet(Tweet tweet){
         return this.tweets.add(tweet);

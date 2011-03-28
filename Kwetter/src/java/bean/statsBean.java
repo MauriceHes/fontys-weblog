@@ -30,27 +30,27 @@ public class statsBean {
     public int getFollowingCount() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+        if(paramUser != null)
         {
-            return service.findUserByName(paramUser).getFollowing().size();
+            return service.getFollowing(paramUser).size();
         }
-        return service.findUserByName("default").getFollowing().size();
+        return service.getFollowing("default").size();
     }
 
     public int getFollowerCount() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+         if(paramUser != null)
         {
-            return service.getFollowers(service.findUserByName(paramUser).getName()).size();
+            return service.getFollowers(paramUser).size();
         }
-        return service.getFollowers(service.findUserByName("default").getName()).size();
+        return service.getFollowers("default").size();
     }
 
     public int getTweetCount() {
         FacesContext context = FacesContext.getCurrentInstance();
         String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
-        if(service.findUserByName(paramUser) != null)
+         if(paramUser != null)
         {
             return service.findUserByName(paramUser).getTweets().size();
         }

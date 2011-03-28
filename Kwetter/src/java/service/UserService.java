@@ -68,21 +68,13 @@ public class UserService implements IUserService, Serializable  {
 
     @Override
     public Collection<User> getFollowers(String name) {
-        Collection<User> temp = new ArrayList<User>();
-        //doorloop alle users
-        for(User u: users) {
-            //haal Users op die User u volgt
-            Collection<User> following = u.getFollowing();
-            //doorloop die Users
-            for(User follower: following) {
-                //als de naam gelijk is aan degene die wij zoeken, voeg User u toe aan de lijst
-                if(follower.getName().equals(name)) {
-                    temp.add(u);
-                }
-            }
-        }
-        return temp;
-    }   
+        return findUserByName(name).getFollowers();
+    }
+
+    @Override
+    public Collection<User> getFollowing(String name) {
+        return findUserByName(name).getFollowing();
+    }
 
     @Override
     public Collection<Tweet> getSearchedTweets(String filter) {
@@ -173,13 +165,21 @@ public class UserService implements IUserService, Serializable  {
         User u3 = new User("tom","httpT","geboren 3");
         User u4 = new User("sjaak","httpS","geboren 4");
         User u5 = new User("default", "httpD", "geboren 5");
+
         u1.addFollowing(u2);
+        u2.addFollower(u1);
+
         u1.addFollowing(u3);
+        u3.addFollower(u1);
+
         u1.addFollowing(u4);
+        u4.addFollower(u1);
 
         u2.addFollowing(u1);
+        u1.addFollower(u2);
 
         u5.addFollowing(u1);
+        u1.addFollower(u5);
 
         Tweet t1 = new Tweet("#hallo", new Date(), "PC");
         Tweet t2 = new Tweet("#hallo #again #you", new Date(), "PC");
