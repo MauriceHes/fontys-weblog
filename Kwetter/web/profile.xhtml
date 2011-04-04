@@ -46,12 +46,14 @@
                 </h:form>
             </div>
             <div id="mentions">
-                blaat
-                <!--<h:form id="tweetForm">
-                    <h:dataTable value="{tweetBean.getTweets}" var="tweet">
-                        <h:column>{tweet.tweet}</h:column>
+                <h:form id="mentionForm">
+                    <h:dataTable value="#{searchBean.mentions}" var="tweet">
+                        <h:column>
+                            <p>#{tweet.tweet}</p>
+                            <p>#{tweet.datum}</p>
+                        </h:column>
                     </h:dataTable>
-                </h:form>-->
+                </h:form>
             </div>
 
         </div>
@@ -61,6 +63,11 @@
         <p>Location: </p>
         <p>Web: <a href="#{userBean.user.web}">#{userBean.user.web}</a></p>
         <p>Bio: #{userBean.user.bio}</p>
+    </ui:define>
+    <ui:define name="S3">
+        <p>#{statsBean.followingCount} following</p>
+        <p>#{statsBean.followerCount} followers</p>
+        <p>#{statsBean.tweetCount} tweets</p>
     </ui:define>
     <ui:define name="S4">
         <h:form>

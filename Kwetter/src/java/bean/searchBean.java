@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import service.IUserService;
 
@@ -40,6 +41,17 @@ public class searchBean {
 
     public Collection<Tweet> getSearchedTweets() {
         return service.getSearchedTweets(filter);
+    }
+
+    public Collection<Tweet> getMentions() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String paramUser = (String)context.getExternalContext().getRequestParameterMap().get("user");
+        if(paramUser != null)
+        {
+            return service.getSearchedTweets("@" + paramUser);
+        }
+        return service.getSearchedTweets("@default");
+
     }
 
 }
