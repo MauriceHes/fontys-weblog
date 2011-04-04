@@ -3,9 +3,11 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -20,13 +22,15 @@ public class User implements Serializable  {
     private String web;
     private String bio;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="users_following")
     private Collection<User> following = new ArrayList();
 
-    @ManyToMany
-    private Collection<User> followers = new ArrayList();
-    
-    @OneToMany
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="users_follower")
+    private Collection<User> followers = new ArrayList();    
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private Collection<Tweet> tweets = new ArrayList();    
 
     public User() {
@@ -95,10 +99,12 @@ public class User implements Serializable  {
     }
 
     public Boolean addFollower(User follower) {
+        follower.addFollowing(this);
         return this.followers.add(follower);
     }
   
-    public Boolean addTweet(Tweet tweet){
+    public Boolean addTweet(Tweet tweet) {
+        tweet.setUser(this);
         return this.tweets.add(tweet);
     }
 

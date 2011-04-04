@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 @Entity
@@ -20,6 +21,9 @@ public class Tweet implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date postDate;
     private String postedFrom;
+
+    @ManyToOne
+    private User user;
 
     public Tweet() {
     }
@@ -59,6 +63,13 @@ public class Tweet implements Serializable {
         this.postedFrom = vanaf;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
 
     @Override
     public int hashCode() {
@@ -78,7 +89,7 @@ public class Tweet implements Serializable {
 
     @Override
     public String toString() {
-        return "twitter.domain.Tweet[id=" + postDate.toString() + "]";
+        return "twitter.domain.Tweet[id=" + postDate.toString() + ";tweet=" + tweet + "]";
     }
 
 }
