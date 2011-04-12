@@ -34,7 +34,7 @@ public interface IUserService {
 
     public Collection<Tweet> getSearchedTweets(String filter);
 
-    public void addTweetToUser(String user, String tweet);
+    public void addTweetToUser(String userName, String tweet);
 
     public List<String> getTrends();
 
