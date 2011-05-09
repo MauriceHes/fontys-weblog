@@ -12,8 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -26,10 +25,11 @@ import javax.persistence.TypedQuery;
  * @author Jurgen
  */
 @Alternative
+@Stateless
 public class UserServiceEJB implements IUserService
 {
     // Data
-    @PersistenceContext(unitName = "KwetterPU")
+    @PersistenceContext(unitName = "KwetterPUEJB")
     private EntityManager em;
 
     // Constructor
