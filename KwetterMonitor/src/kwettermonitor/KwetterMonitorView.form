@@ -57,6 +57,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="kwettermonitor.KwetterMonitorView" id="searchTweets" methodName="searchTweets"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
             <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
           </Properties>
@@ -170,9 +173,6 @@
     </Property>
     <Property name="menuBar" type="javax.swing.JMenuBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
       <ComponentRef name="menuBar"/>
-    </Property>
-    <Property name="statusBar" type="javax.swing.JComponent" editor="org.netbeans.modules.form.ComponentChooserEditor">
-      <ComponentRef name="default"/>
     </Property>
   </Properties>
   <AuxValues>
