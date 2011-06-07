@@ -5,24 +5,22 @@
 package kwettermonitor;
 
 import JMS.TweetGateway;
-import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
-import javax.swing.Icon;
+import org.jdesktop.application.Action;
+import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.FrameView;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 /**
  * The application's main frame.
  */
-public class KwetterMonitorView extends FrameView {
+public class KwetterMonitorView extends FrameView implements ActionListener {
     
     private TweetGateway tgw;
+    private int bla;
 
     public KwetterMonitorView(SingleFrameApplication app) {
         super(app);
@@ -31,6 +29,15 @@ public class KwetterMonitorView extends FrameView {
         
         tgw = new TweetGateway();
         tgw.start();
+        
+        bla = 0;
+        Timer t = new Timer(1000, this);
+        t.start();
+        
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        this.searchTweets();
     }
 
     @Action
@@ -143,7 +150,10 @@ public class KwetterMonitorView extends FrameView {
 
     @Action
     public void searchTweets() {
-        // gebruik topic om de tweets te zoeken
+        if(jTextField1.getText() != null) {
+            bla++;
+            System.out.println(bla);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
