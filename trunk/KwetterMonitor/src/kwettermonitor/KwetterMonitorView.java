@@ -7,6 +7,20 @@ package kwettermonitor;
 import JMS.TweetGateway;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
@@ -17,27 +31,48 @@ import javax.swing.Timer;
 /**
  * The application's main frame.
  */
-public class KwetterMonitorView extends FrameView implements ActionListener {
+public class KwetterMonitorView extends FrameView implements ActionListener, MessageListener {
     
     private TweetGateway tgw;
+    private Timer t = new Timer(1000, this);
     private int bla;
+    
+    private Context jndiContext;
+    private ConnectionFactory connectionFactory;
+    private Session session;
+    private Topic topic;
+    private Connection connection;
+    private MessageConsumer consumer;
 
-    public KwetterMonitorView(SingleFrameApplication app) {
+    public KwetterMonitorView(SingleFrameApplication app) throws NamingException, JMSException {
         super(app);
 
         initComponents();
         
         tgw = new TweetGateway();
         tgw.start();
-        
         bla = 0;
-        Timer t = new Timer(1000, this);
-        t.start();
+        
+        // JMS Listener
+        jndiContext = new InitialContext();
+        connectionFactory = (ConnectionFactory)jndiContext.lookup("MonitorConnectionFactory");
+        topic = (Topic)jndiContext.lookup("SearchTweetTopic");
+        
+        connection = connectionFactory.createConnection();
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        
+        /*consumer = session.createConsumer(topic);
+        consumer.setMessageListener(this);
+        connection.start();*/
         
     }
     
     public void actionPerformed(ActionEvent e) {
-        this.searchTweets();
+        try {
+            this.searchTweets();
+        } catch (JMSException ex) {
+            Logger.getLogger(KwetterMonitorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Action
@@ -149,10 +184,17 @@ public class KwetterMonitorView extends FrameView implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     @Action
-    public void searchTweets() {
-        if(jTextField1.getText() != null) {
+    public void searchTweets() throws JMSException {
+        t.start();
+        if(jTextField1.getText() != null && !jTextField1.getText().isEmpty()) {
             bla++;
-            System.out.println(bla);
+            //System.out.println(bla);
+            
+            // lees zooi uit de topic
+            consumer = session.createConsumer(topic, "hashtag = '" + jTextField1.getText() + "'");
+            consumer.setMessageListener(this);
+            connection.start();
+            
         }
     }
 
@@ -167,4 +209,15 @@ public class KwetterMonitorView extends FrameView implements ActionListener {
     // End of variables declaration//GEN-END:variables
 
     private JDialog aboutBox;
+
+    public void onMessage(Message message) {
+        try {
+            System.out.println("message received " + ((TextMessage)message).getText());
+            if(message.getStringProperty("hashtag").equals("sport")) {
+                System.out.println("en we weten dat het een sporttag is.");
+            }
+        } catch (JMSException ex) {
+            Logger.getLogger(KwetterMonitorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

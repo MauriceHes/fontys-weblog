@@ -38,5 +38,6 @@ public class TweetGateway extends MessagingGateway
         } catch (JMSException ex) {
             Logger.getLogger(TweetGateway.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }   
+    
 }
