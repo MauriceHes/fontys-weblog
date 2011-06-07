@@ -4,6 +4,7 @@
 
 package kwettermonitor;
 
+import JMS.TweetGateway;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -20,11 +21,16 @@ import javax.swing.JFrame;
  * The application's main frame.
  */
 public class KwetterMonitorView extends FrameView {
+    
+    private TweetGateway tgw;
 
     public KwetterMonitorView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
+        
+        tgw = new TweetGateway();
+        tgw.start();
     }
 
     @Action
@@ -67,6 +73,8 @@ public class KwetterMonitorView extends FrameView {
         jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
         jTextField1.setName("jTextField1"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(kwettermonitor.KwetterMonitorApp.class).getContext().getActionMap(KwetterMonitorView.class, this);
+        jButton1.setAction(actionMap.get("searchTweets")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
 
@@ -114,7 +122,6 @@ public class KwetterMonitorView extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(kwettermonitor.KwetterMonitorApp.class).getContext().getActionMap(KwetterMonitorView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -133,6 +140,11 @@ public class KwetterMonitorView extends FrameView {
         setComponent(mainPanel);
         setMenuBar(menuBar);
     }// </editor-fold>//GEN-END:initComponents
+
+    @Action
+    public void searchTweets() {
+        // gebruik topic om de tweets te zoeken
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
