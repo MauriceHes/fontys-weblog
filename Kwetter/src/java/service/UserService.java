@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.enterprise.inject.Alternative;
 
-@Alternative
 @Stateless
 public class UserService implements IUserService, Serializable  {
 
@@ -79,7 +78,7 @@ public class UserService implements IUserService, Serializable  {
     @Override
     public Collection<Tweet> getSearchedTweets(String filter) {
         Collection<Tweet> temp = new ArrayList();
-        if(filter != null) {            
+        if(filter != null) {
             //doorloop alle users
             for(User u:users)
             {
