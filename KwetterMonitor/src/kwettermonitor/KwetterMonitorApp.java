@@ -4,6 +4,10 @@
 
 package kwettermonitor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -16,7 +20,13 @@ public class KwetterMonitorApp extends SingleFrameApplication {
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        show(new KwetterMonitorView(this));
+        try {
+            show(new KwetterMonitorView(this));
+        } catch (NamingException ex) {
+            Logger.getLogger(KwetterMonitorApp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
+            Logger.getLogger(KwetterMonitorApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

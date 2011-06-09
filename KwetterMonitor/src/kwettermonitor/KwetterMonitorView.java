@@ -31,11 +31,9 @@ import javax.swing.Timer;
 /**
  * The application's main frame.
  */
-public class KwetterMonitorView extends FrameView implements ActionListener, MessageListener {
+public class KwetterMonitorView extends FrameView implements MessageListener {
     
     private TweetGateway tgw;
-    private Timer t = new Timer(1000, this);
-    private int bla;
     
     private Context jndiContext;
     private ConnectionFactory connectionFactory;
@@ -43,6 +41,7 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
     private Topic topic;
     private Connection connection;
     private MessageConsumer consumer;
+    private String oldSearch;
 
     public KwetterMonitorView(SingleFrameApplication app) throws NamingException, JMSException {
         super(app);
@@ -51,7 +50,8 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
         
         tgw = new TweetGateway();
         tgw.start();
-        bla = 0;
+        
+        oldSearch = "";
         
         // JMS Listener
         jndiContext = new InitialContext();
@@ -59,20 +59,7 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
         topic = (Topic)jndiContext.lookup("SearchTweetTopic");
         
         connection = connectionFactory.createConnection();
-        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        
-        /*consumer = session.createConsumer(topic);
-        consumer.setMessageListener(this);
-        connection.start();*/
-        
-    }
-    
-    public void actionPerformed(ActionEvent e) {
-        try {
-            this.searchTweets();
-        } catch (JMSException ex) {
-            Logger.getLogger(KwetterMonitorView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);        
     }
 
     @Action
@@ -99,7 +86,7 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jTextArea1 = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -122,13 +109,10 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setName("jTextArea1"); // NOI18N
+        jScrollPane1.setViewportView(jTextArea1);
 
         org.jdesktop.layout.GroupLayout mainPanelLayout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -136,14 +120,14 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, mainPanelLayout.createSequentialGroup()
+                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .add(mainPanelLayout.createSequentialGroup()
                         .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 256, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(jButton1))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel1))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .add(jLabel1))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -155,7 +139,7 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -185,24 +169,24 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
 
     @Action
     public void searchTweets() throws JMSException {
-        t.start();
-        if(jTextField1.getText() != null && !jTextField1.getText().isEmpty()) {
-            bla++;
-            //System.out.println(bla);
-            
-            // lees zooi uit de topic
-            consumer = session.createConsumer(topic, "hashtag = '" + jTextField1.getText() + "'");
-            consumer.setMessageListener(this);
-            connection.start();
-            
+        String text = jTextField1.getText();
+        if(text != null && !text.isEmpty()) {
+            if(!oldSearch.equals(text)) { //nieuwe search, anders knop negeren
+                oldSearch = text;
+                jTextArea1.setText("");
+                // lees zooi uit de topic
+                consumer = session.createConsumer(topic, "hashtag = '" + jTextField1.getText() + "'");
+                consumer.setMessageListener(this);
+                connection.start();
+            } 
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
@@ -216,6 +200,7 @@ public class KwetterMonitorView extends FrameView implements ActionListener, Mes
             if(message.getStringProperty("hashtag").equals("sport")) {
                 System.out.println("en we weten dat het een sporttag is.");
             }
+            jTextArea1.append(((TextMessage)message).getText() + "\r\n");
         } catch (JMSException ex) {
             Logger.getLogger(KwetterMonitorView.class.getName()).log(Level.SEVERE, null, ex);
         }
