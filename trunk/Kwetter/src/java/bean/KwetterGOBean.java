@@ -35,7 +35,7 @@ public class KwetterGOBean implements MessageListener {
     public void onMessage(Message message) {
         try {
             //TextMessage tm = (TextMessage)message;
-            System.out.println(message.getStringProperty("user"));
+            System.out.println("KwetterGOBean.java - onMessage: " + message.getStringProperty("user"));
             service.addTweetToUser(message.getStringProperty("user"), message.getStringProperty("tweet"));
         } catch (JMSException ex) {
             Logger.getLogger(KwetterGOBean.class.getName()).log(Level.SEVERE, null, ex);
